@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Records</title>
+    <link rel="stylesheet" href="../../static\css\style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet"></head>
+</head>
+<body>
+    <div class = "container d-flex justify-content-center pt-5">
+        <div class = "content_box col-4 text-center text-light">
+            <div>
+                <h4 class = "register_title font-weight-bold p-2"><span style = "color: #B95FFF">Token  </span><span style = "color: #00FFB2">Records</span></h4>
+            </div>
+            <div class = "index_form_box p-3 text-left">
+                <form action="/process_registration" method="POST">
+                    <div class = "flash_error">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p>{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class = "user_input p-1">
+                        <label>Email</label>
+                        <input class="form-control" type="text" name="email">
+                    </div>
+                    <div class = "user_input p-1">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" name="first_name">
+                    </div>
+                    <div class = "user_input p-1">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" name="last_name">
+                    </div>
+                    <div class = "user_input p-1">
+                        <label>Password</label>
+                        <input class="form-control" type="password" name="password">
+                    </div>
+                    <div class = "user_input p-1">
+                        <label id = "confirm_password">Confirm Password</label>
+                        <input class="form-control" type="password" name="confirm_password">
+                    </div>
+                    <div class = "text-center pt-2">
+                        <button class = "btn btn-lg"><a class="index_buttons text-decoration-none"><span style = "color: #00FFB2">Register</span></a></button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <button class = "btn btn-md text-center"><a class="register_back_button text-light text-decoration-none" href = "/">Back</a></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

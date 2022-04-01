@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Records</title>
+    <link rel="stylesheet" href="../../static\css\style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!--------------------------------------------- Sidebar ---------------------------------------------------->
+
+    <div class = "sidebar position-fixed col-2 text-light text-center p-2">
+
+            <!-- App Name -->
+        <div class = "app_name_border m-2">
+            <div class = "app_name text-center font-weight-bold p-1 py-2"><a class = "text-decoration-none" href = "/collection">
+                <h1 class = "token_text"><span style = "color: #A24CE5">Token </span></h1>
+                <h1 class = "records_text"><span style = "color: #02FFB3">Records</span></h1>
+            </a></div>
+        </div>
+
+        <!-- Routes Pages-->
+        <div class = "side_bar_route_box d-flex flex-column justify-content-between">
+            <div>
+                <div class = "side_bar_collection pt-5 px-4"><a class = "text-decoration-none text-light" href = "/collection">
+                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Collection</h5>
+                </a></div>
+                <div class = "side_bar_watchlist px-2">
+                    <h5 class = "font-weight-bold p-3">Watchlist</h5>
+                </div>
+                <div class = "side_bar_sold px-2">
+                    <h5 class = "font-weight-bold p-3">Sold</h5>
+                </div>
+                <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
+                    <h5 class = "font-weight-bold p-3">Resources</h5>
+                </a></div>
+                <div class = "side_bar_solana_chart px-2"><a class = "text-decoration-none text-light" href = "/solana_chart">
+                    <h5 class = "font-weight-bold py-3">Solana Chart</h5>
+                </a></div>
+            </div>
+            <div class ="logout_button_box">
+                <a href="/logout" class = "logout_button text-light text-decoration-none">Logout</a>
+            </div>
+        </div>
+    </div>
+
+<!-- *********************************************************Top Navbar******************************************************** -->
+
+    <div class = "container col-10 mr-0 p-0">
+
+        <!-- Top Navbar -->
+        <div class = "top_navbar_box fixed-top pt-3 px-4 offset-2">
+            <div class = "top_navbar d-flex justify-content-between">
+                <div class = "solana_ticker">
+
+                    <!-- TradingView Widget BEGIN -->
+
+                    <div class="tradingview-widget-container ml-4">
+                        <div class="tradingview-widget-container__widget"></div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                            {
+                            "symbol": "FTX:SOLUSD",
+                            "width": 240,
+                            "colorTheme": "dark",
+                            "isTransparent": true,
+                            "locale": "en"
+                            }
+                            </script>
+                    </div>
+                </div>
+
+                <!-- TradingView Widget END -->
+
+                <!-- Default Links top navbar -->
+
+                <div class = "navbar_links d-flex align-items-center">
+                    <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://magiceden.io/">Magic Eden</a></h3>
+                    <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanart.io/">Solanart</a></h3>
+                    <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanafloor.com/">Solana Floor</a></h3>
+                    <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://sols.watch/">Sols Watch</a></h3>
+                </div>
+            </div>
+        </div>
+
+<!-- ***************************************************************** -->
+
+        <!-- Main content div box -->
+
+        <div class = "main_content container">
+            <div>
+                <p class = "collection_title text-light text-center font-weight-bold mt-5 mb-0">Collection</p>
+            </div>
+            <div class = "add_new_box text-center">
+                <a href = "/collection_new" class = "add_nft text-center font-weight-bold text-decoration-none"><span style = "color: #02FFB3">+ Add NFT</span></a>
+            </div>
+            <div class = "main_content_display_all container mt-2">
+                <div class = "main_row row text-center pl-4">
+                    {% for nft in nfts %}
+                        {% if nft.user_id == session.user_id %}
+                            <div class = "click_to_view_div p-4 ">
+                                <div class = "click_to_view text-light">
+                                    <a href = "/collection_view/{{nft.id}}" class = "nft_image font-weight-bold text-decoration-none"><img class = "img" src = "{{ url_for('static' , filename = 'uploads/' + nft.image_name) }}"></a>
+                                    <div class = "click_to_view_info">
+                                    <div class = "click_to_view_info_box">
+                                        <h5 class = "pt-2">{{nft.collection_name}}</h5>
+                                        <h5>{{nft.token_number}}</h5>
+                                        <h5 class = "main_for_sale_text"></h5>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Records</title>
+    <link rel="stylesheet" href="../../static\css\style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet"></head>
+    <!-- <script src="static\js\script.js"></script> -->
+<body>
+    <div class = "index_main_div container d-flex h-100 align-items-center">
+        <div class = "index_titles_box text-left m-5 pt-5 p-2">
+            <h1 class = "index_title font-weight-bold"><span style = "color: #B95FFF">Token </span><span style = "color: #02FFB3">Records</span></h1>
+            <h1 class = "index_subtitle text-light">Organize and track NFT trades made on the Solana blockchain</h1>
+        </div>
+
+<!-- **************************************************** Login ************************************************** -->
+
+        <div class = "index_form_box col-3 mt-5 m-4 p-4">
+            <div class = "text-center">
+                <form action="/process_login" method="POST">
+                    <div class = "flash_error">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p>{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class = "user_input p-2">
+                        <input class="form-control rounded" type="text" placeholder="Email" name="email">
+                    </div>
+                    <div class = "user_input p-2">
+                        <input class="form-control rounded" placeholder="Password" type="password" name="password">
+                    </div>
+                    <button class = "btn btn-lg"><a class="index_buttons text-light text-decoration-none">Login</a></button>
+                </form>
+            </div>
+
+<!-- **************************************************** Register ************************************************** -->
+
+            <div class = "text-center border-top pt-2">
+                <button class = "btn btn-lg"><a class="index_buttons text-light text-decoration-none" href = "/register"><span style = "color: #02FFB3">Register</span></a></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- Display on for login --!>
+
+<!-- <button class = "btn btn-lg" onclick = "showForm1()"><a class="index_buttons text-light text-decoration-none">Login</a></button>
+                <form id = "loginForm" style = "display: none" action="/process_login" method="POST"> -->
+
+<!-- Display on for register --!>
+<!-- <button class = "btn btn-lg" onclick = "showForm()"><a class="index_buttons text-light text-decoration-none">Register</a></button>
+<form id = "registerForm" style = "display: none" action="/process_registration" method="POST"> -->

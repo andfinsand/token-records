@@ -1,0 +1,226 @@
+/* Global */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Play";
+}
+
+body {
+    background-color: #0F001B !important;
+    /* background-color: #1C1D25 !important; */
+    /* background-image: linear-gradient(180deg, #000000 58.98%, #A24CE5 100%); */
+}
+
+/*************************************************** Logo ************************************/
+
+.app_name {
+    border-radius: 35px;
+    background-image: linear-gradient(150deg, #443B7A 1%, #220F4B 40%);
+}
+
+.app_name_border {
+    border-radius: 35px;
+    padding: 1px;
+    background-image: linear-gradient(to bottom, #02FFB3 1%, #B95FFF 50%);
+    box-shadow: 2px 3px 7px black;
+}
+
+.token_text {
+    font-size: 36px;
+    line-height: .8em;
+}
+
+.records_text {
+    font-size: 36px;
+    line-height: .8em;
+}
+
+/***************************************************Sidebar ************************************/
+
+.sidebar {
+    /* background-color: #282828; */
+    background-image: linear-gradient(180deg, #221F45 58.98%, #463A7B 100%);
+    height: 100vh;
+    padding-top: 80px;
+    /* min-width: 220px; */
+}
+
+.sidebar_highlight_box {
+    border-radius: 40px;
+    background-image: linear-gradient(to right, #A24CE5 10%, rgba(0, 255, 178, 0.6) 90%);
+    box-shadow: 2px 3px 5px black;
+}
+
+.side_bar_route_box {
+    height: 80vh;
+}
+
+.logout_button {
+    font-size: 18px;
+}
+
+/***************************************************Top Navbar ************************************/
+
+.top_navbar_box {
+    background-color: #0F001B;
+}
+
+.top_navbar {
+    /* background-color: #1A313C; */
+    /* background-color: #282828; */
+    background-image: linear-gradient(to right, #463A7B 5%, #221F45 60.83%);
+    border-radius: 40px;
+    height: 90px;
+}
+
+.solana_ticker {
+    background-color: transparent;
+}
+
+/*************************************************** Main Container*********************************/
+
+.container {
+    margin: 0px;
+}
+
+.add_new_box {
+    font-size: 18px;
+}
+
+.main_content {
+    padding-top: 100px;
+}
+
+.main_row {
+    height: 650px;
+}
+
+.click_to_view {
+    border-radius: 25px;
+    width: 220px !important;
+    height: 220px !important;
+}
+
+/************************************************************* View *********************************************/
+
+.view_main_div {
+    background-image: linear-gradient(150deg, #281E54 20%, #200D49 60%);
+    border-radius: 40px;
+}
+
+/* .view_nft_image_div {
+    background-color: #10273D;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+
+} */
+
+.nft_thumb {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
+    width: 370px;
+    height: 370px;
+}
+
+.img {
+    backface-visibility: hidden;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+}
+
+.view_nft_image_info_div {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
+    width: 370px;
+    height: 290px;
+}
+
+.view_right_info_div {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-radius: 25px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
+    width: 370px;
+    height: 370px;
+}
+
+.view_calculator {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-radius: 25px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
+    width: 370px;
+    height: 265px;
+}
+
+.view_calculator_main {
+    background-color: #3B5173;
+    border-radius: 15px;
+    height: 140px;
+}
+
+.view_calculator_types {
+    height: 20px;
+}
+
+.view_note_space {
+    background-color: #3B5173;
+    border-radius: 15px;
+    height: 90px;
+}
+
+/***************************************************** Index Page *****************************************************/
+
+.index_main_div {
+    margin-top: 100px;
+}
+
+.index_title {
+    font-size: 84px;
+}
+
+.index_buttons {
+    font-size: 32px;
+}
+
+.index_form_box {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-radius: 15px;
+}
+
+/***************************************************** Collection Page *****************************************************/
+
+.collection_title {
+    font-size: 48px;
+}
+
+/********** Collection New Form Page **********/
+
+.collection_new_form_box_sub_div {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-radius: 30px;
+}
+
+
+
+/***************************************************** Resources ***********************************/
+
+.resource_links_form_box {
+    height: 80vh;
+    background-color: #1A313C;
+    border-radius: 30px;
+}
+
+/***************************************************** Solana Chart Page **************************************************/
+
+.tradingview-widget-container {
+    height: 80vh;
+}
+
+#tradingview_c6882 {
+    height: 67vh;
+}
