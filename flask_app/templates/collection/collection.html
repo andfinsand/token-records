@@ -103,15 +103,13 @@
                 <div class = "main_row row text-center pl-4">
                     {% for nft in nfts %}
                         {% if nft.user_id == session.user_id %}
-                            <div class = "click_to_view_div p-4 ">
-                                <div class = "click_to_view text-light">
+                            <div class = "click_to_view_div p-4">
+                                <div class = "click_to_view text-light mt-2 mb-5">
                                     <a href = "/collection_view/{{nft.id}}" class = "nft_image font-weight-bold text-decoration-none"><img class = "img" src = "{{ url_for('static' , filename = 'uploads/' + nft.image_name) }}"></a>
-                                    <div class = "click_to_view_info">
                                     <div class = "click_to_view_info_box">
                                         <h5 class = "pt-2">{{nft.collection_name}}</h5>
                                         <h5>{{nft.token_number}}</h5>
                                         <h5 class = "main_for_sale_text"></h5>
-                                    </div>
                                     </div>
                                 </div>
                             </div>

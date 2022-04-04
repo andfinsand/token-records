@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
-    <script src="static\js\script.js"></script>
 </head>
 <body>
 
@@ -100,8 +99,8 @@
             </div>
             <div class = "collection_new_form_box_main_div d-flex justify-content-center m-4">
                 <div class = "collection_new_form_box_sub_div col-8 text-light pt-2">
-                    <h4 class = "collection_new_form_subtitle text-center mt-2"><span style = "color: #02FFB3">Enter Token information</span></h4>
-                    <form action="/process_new_collection" method="POST" enctype="multipart/form-data">
+                    <h4 class = "collection_new_form_subtitle text-center mt-2"><span style = "color: #02FFB3">Edit Token information</span></h4>
+                    <form action="/process_edit_collection" method="POST" enctype="multipart/form-data">
                         <div class = "flash_error">
                             {% with messages = get_flashed_messages() %}
                                 {% if messages %}
@@ -117,19 +116,19 @@
                         <div class = "collection_new_form_purple_separator m-4 px-5 py-4">
                             <div class = "user_input p-1">
                                 <label>Collection Name</label>
-                                <input class="form-control" type="text" name="collection_name">
+                                <input class="form-control" type="text" name="collection_name" value="{{edit.collection_name}}">
                             </div>
                             <div class = "user_input p-1">
                                 <label>Token Number</label>
-                                <input class="form-control" type="text" name="token_number">
+                                <input class="form-control" type="text" name="token_number" value="{{edit.token_number}}">
                             </div>
                             <div class = "user_input p-1">
                                 <label>Upload Image</label>
-                                <input class="form-control" type="file" name="image">
+                                <input class="form-control" type="file" name="image" value = "{{edit.image_name}}">
                             </div>
                             <div class = "user_input p-1">
                                 <label>Link to Collection Page</label>
-                                <input class="form-control" type="text" name="collection_link_to_exchange">
+                                <input class="form-control" type="text" name="collection_link_to_exchange" value = "{{edit.collection_link_to_exchange}}">
                             </div>
                         </div>
 
@@ -138,71 +137,80 @@
                         <div = class = "collection_new_form_purple_separator m-4 px-5 py-4">
                             <div class = "user_input p-1">
                                 <label>Purchase Price</label>
-                                <input class="form-control" type="text" name="purchase_price">
+                                <input class="form-control" type="text" name="purchase_price" value = "{{edit.purchase_price}}">
                             </div>
                             <div class = "user_input p-1">
                                 <label>Date of Purchase</label>
-                                <input class="form-control" type="date" name="date_of_purchase">
+                                <input class="form-control" type="date" name="date_of_purchase" value = "{{edit.date_of_purchase}}">
                             </div>
                             <div class = "user_input p-1">
                                 <label>Trade Fees</label>
-                                <input class="form-control" type="text" name="trade_fees">
+                                <input class="form-control" type="text" name="trade_fees" value = "{{edit.trade_fees}}">
                             </div>
                             <div class = "user_input p-1">
                                 <label>Staking Feature?</label>
-                                <div class = "form_check pl-4">
-                                    <input class="form-check-input" type="radio" name="has_staking" id = "has_staking0" value="0" checked>
-                                    <label class = "form-check-label" for = "has_staking0">No</label>
-                                </div>
-                                <div class = "form_check  pl-4">
-                                    <input class="form-check-input" type="radio" name="has_staking" id = "has_staking1" value="1">
-                                    <label class = "form-check-label" for = "has_staking1">Yes</label>
-                                </div>
+                                {% if edit.has_staking == 0 %}
+                                    <div class = "form_check pl-4">
+                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking0" value = "0" checked>
+                                        <label class = "form-check-label" for = "has_staking0">No</label>
+                                    </div>
+                                    <div class = "form_check  pl-4">
+                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking1" value = "1">
+                                        <label class = "form-check-label" for = "has_staking1">Yes</label>
+                                    </div>
+                                {% else %}
+                                    <div class = "form_check pl-4">
+                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking0" value = "0">
+                                        <label class = "form-check-label" for = "has_staking0">No</label>
+                                    </div>
+                                    <div class = "form_check  pl-4">
+                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking1" value = "1" checked>
+                                        <label class = "form-check-label" for = "has_staking1">Yes</label>
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class = "user_input p-1">
                                 <label>Notes</label>
-                                <input class="form-control" type="text" name="notes">
+                                <input class="form-control" type="text" name="notes" value = "{{edit.notes}}">
                             </div>
                         </div>
 
                         <!-- Bottom Section-->
 
-                        <div = class = "collection_new_form_purple_separator mt-4 mx-4 px-5 py-4">
+                        <div = class = "collection_new_form_purple_separator m-4 px-5 py-4">
                             <div class = "user_input p-1">
                                 <label>Is the NFT listed for sale?</label>
+                                {% if edit.is_for_sale == 0 %}
                                 <div class = "form_check pl-4">
                                     <input class="form-check-input" type="radio" name="is_for_sale" id = "is_for_sale0" value="0" checked>
-                                    <label class = "form-check-label" onclick = "hideForm()" for = "is_for_sale0">No</label>
+                                    <label class = "form-check-label" for = "is_for_sale0">No</label>
                                 </div>
                                 <div class = "form_check  pl-4">
                                     <input class="form-check-input" type="radio" name="is_for_sale" id = "is_for_sale1" value="1">
-                                    <label class = "form-check-label" onclick = "showForm()" for = "is_for_sale1">Yes</label>
+                                    <label class = "form-check-label" for = "is_for_sale1">Yes</label>
                                 </div>
-                                <div id = "forSale" style = "display: none">
-                                    <div class = "user_input p-1">
-                                        <label>For Sale Price</label>
-                                        <input class="form-control" type="text" name="sale_price" value = "0">
-                                    </div>
-                                    <div class = "user_input p-1">
-                                        <label>For Sale Link</label>
-                                        <input class="form-control" type="text" name="link_to_sale">
-                                    </div>
+                                {% else %}
+                                <div class = "form_check pl-4">
+                                    <input class="form-check-input" type="radio" name="is_for_sale" id = "is_for_sale0" value="0">
+                                    <label class = "form-check-label" for = "is_for_sale0">No</label>
                                 </div>
+                                <div class = "form_check  pl-4">
+                                    <input class="form-check-input" type="radio" name="is_for_sale" id = "is_for_sale1" value="1" checked>
+                                    <label class = "form-check-label" for = "is_for_sale1">Yes</label>
+                                {% endif %}
                             </div>
-                            <!-- <div class = "user_input p-1">
+                            <div class = "user_input p-1">
                                 <label>For Sale Price</label>
-                                <input class="form-control" type="text" name="sale_price">
+                                <input class = "form-control" type = "text" name = "sale_price" value = "{{edit.sale_price}}">
                             </div>
                             <div class = "user_input p-1">
                                 <label>For Sale Link</label>
-                                <input class="form-control" type="text" name="link_to_sale">
+                                <input class = "form-control" type = "text" name = "link_to_sale" value = "{{edit.link_to_sale}}">
                             </div>
                             <div class = "text-center pt-2">
-                                <button class = "btn btn-lg"><a class="index_buttons text-light text-decoration-none">Submit</a></button>
-                            </div> -->
-                        </div>
-                        <div class = "text-center">
-                            <button class = "btn btn-lg"><a class="index_buttons text-light text-decoration-none">Submit</a></button>
+                                <!-- <input type="submit" value="Update" class="btn btn-primary"> -->
+                                <button class = "btn btn-lg"><a class="index_buttons text-light text-decoration-none">Update</a></button>
+                            </div>
                         </div>
                     </form>
                 </div>

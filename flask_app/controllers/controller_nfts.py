@@ -82,20 +82,21 @@ def process_new_collection():
         "image_name" : image.filename,
         "collection_name" : request.form['collection_name'],
         "token_number": request.form['token_number'],
+        "collection_link_to_exchange": request.form['collection_link_to_exchange'],
         "purchase_price": request.form['purchase_price'],
+        "date_of_purchase": request.form['date_of_purchase'],
+        "trade_fees": request.form['trade_fees'],
+        "has_staking": request.form['has_staking'],
+        "notes": request.form['notes'],
+        "is_for_sale": request.form['is_for_sale'],
+        "sale_price": request.form['sale_price'],
+        "link_to_sale": request.form['link_to_sale'],
         "user_id": session["user_id"]
     }
     # return redirect(f'/main/{id}')
     Nft.create(data)
 
-
-    # imageName = {
-    #     "image_name" : image.filename,
-    #     "user_id": session["user_id"]
-    # }
-    # Nft.enter_image_name(imageName)
-
-    return redirect('/collection') # , uploaded_image=image.filename) #, filename = filename)
+    return redirect('/collection')
 
 ####################################################################################################################
 
@@ -109,27 +110,49 @@ def edit(id):
     data = {
         "id":id
     }
-    return render_template('collection/collection.html', edit = Nft.get_by_id(data))
+    user_data = {
+        "id" : session['user_id']
+    }
+    return render_template('collection/collection_edit.html', edit = Nft.get_by_id(data) , user=User.get_by_id(user_data))
 
 # Process edit collection form
 
-@app.route('/collection/process_edit', methods=['POST'])
+@app.route('/process_edit_collection', methods=['POST'])
 def update():
     if 'user_id' not in session:
         return redirect('/logout')
-    if not Nft.validate_title(request.form):
-        page = request.form['id']
-        return redirect (f'/main/edit/{page}')
-    # data = {
-    #     "title":  request.form['title'],
-    #     "year" : request.form['year'],
-    #     "director": request.form['director'],
-    #     "movie_series": request.form['movie_series'],
-    #     "rating": request.form["rating"],
-    #     "imdb_link": request.form["imdb_link"],
-    #     "user_id": session["user_id"]
-    # }
+
+    # if not Nft.validate_title(request.form):
+    #     page = request.form['id']
+    #     return redirect (f'/main/edit/{page}')
+
+    # data = {'id' : request.form['id']}
+    # nft_in_db = Nft.get_by_id(data)
+    # session['nft_id'] = nft_in_db.id
+
+    if request.files:
+        image = request.files["image"]
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
+
+    data = {
+        "image_name" : image.filename,
+        "collection_name" : request.form['collection_name'],
+        "token_number": request.form['token_number'],
+        "collection_link_to_exchange": request.form['collection_link_to_exchange'],
+        "purchase_price": request.form['purchase_price'],
+        "date_of_purchase": request.form['date_of_purchase'],
+        "trade_fees": request.form['trade_fees'],
+        "has_staking": request.form['has_staking'],
+        "notes": request.form['notes'],
+        "is_for_sale": request.form['is_for_sale'],
+        "sale_price": request.form['sale_price'],
+        "link_to_sale": request.form['link_to_sale'],
+        # "user_id": session["user_id"]
+        "id": session["user_id"]
+    }
+    print("*************************************************************")
     Nft.update(data)
+    print("*************************************************************")
     return redirect('/collection')
 
 # Delete favorite

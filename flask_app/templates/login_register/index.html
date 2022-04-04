@@ -23,7 +23,7 @@
         <div class = "index_form_box col-3 mt-5 m-4 p-4">
             <div class = "text-center">
                 <form action="/process_login" method="POST">
-                    <div class = "flash_error">
+                    <div class = "flash_error text-danger">
                         {% with messages = get_flashed_messages() %}
                             {% if messages %}
                                 {% for message in messages %}

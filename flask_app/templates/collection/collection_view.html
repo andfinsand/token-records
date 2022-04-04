@@ -113,10 +113,10 @@
                                     <h2>{{nft.token_number}}</h2>
                                 </div>
                                 <div class = "view_project_site m-3">
-                                    <h5>View on Exchange</h5>
+                                    <h5><a class = "text-decoration-none text-light" href = "{{ nft.collection_link_to_exchange }}">View on Exchange</a></h5>
                                 </div>
                                 <div class = "view_edit m-3">
-                                    <h3><span style = "color: #02FFB3">Edit</span></h3>
+                                    <h3><a href = "/collection/edit/{{nft.id}}" class = "text-decoration-none"><span style = "color: #02FFB3">Edit</span></a></h3>
                                 </div>
                             </div>
                             <div class = "view_delete_sold d-flex justify-content-between m-2">
@@ -146,15 +146,20 @@
                             </div>
                             <div class = "view_purchase_date d-flex justify-content-between px-4">
                                 <p>Date Purchased</p>
-                                <p>{{ginga}}</p>
+                                <p>{{nft.date_of_purchase}}</p>
                             </div>
                             <div class = "view_staking_option d-flex justify-content-between px-4">
                                 <p>Staking</p>
-                                <p>Y/N {{ginga}}</p>
+                                {% if nft.has_staking == 0 %}
+                                    <p>No</p>
+                                {% else %}
+                                    <p>Yes</p>
+                                {% endif %}
                             </div>
                             <div class = "view_note_div my-3 pt-3 px-0">
                                 <h6 class = "view_note_text text-light px-4">Notes</h6>
-                                <div class = "view_note_space m-2 mx-3">
+                                <div class = "view_note_space m-2 mx-3 px-3 py-2">
+                                    <p>{{nft.notes}}</p>
                                 </div>
                             </div>
                         </div>

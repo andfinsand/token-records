@@ -8,7 +8,15 @@ class Nft:
         self.image_name = data['image_name']
         self.collection_name = data['collection_name']
         self.token_number = data['token_number']
+        self.collection_link_to_exchange = data['collection_link_to_exchange']
         self.purchase_price = data['purchase_price']
+        self.date_of_purchase = data['date_of_purchase']
+        self.trade_fees = data['trade_fees']
+        self.has_staking = data['has_staking']
+        self.notes = data['notes']
+        self.is_for_sale = data['is_for_sale']
+        self.sale_price = data['sale_price']
+        self.link_to_sale = data['link_to_sale']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -16,13 +24,8 @@ class Nft:
 
     @classmethod
     def create(cls, data):
-        query = "INSERT INTO nfts ( image_name, collection_name , token_number , purchase_price, user_id) VALUES (%(image_name)s, %(collection_name)s, %(token_number)s, %(purchase_price)s, %(user_id)s)"
+        query = "INSERT INTO nfts ( image_name , collection_name , token_number , collection_link_to_exchange , purchase_price,  date_of_purchase , trade_fees , has_staking , notes , is_for_sale , sale_price , link_to_sale , user_id) VALUES (%(image_name)s, %(collection_name)s, %(token_number)s, %(collection_link_to_exchange)s, %(purchase_price)s, %(date_of_purchase)s, %(trade_fees)s, %(has_staking)s, %(notes)s, %(is_for_sale)s, %(sale_price)s, %(link_to_sale)s, %(user_id)s)"
         return connectToMySQL(db_name).query_db(query, data)
-
-    # @classmethod
-    # def enter_image_name(cls, data):
-    #     query = "INSERT INTO nfts ( image_name, user_id) VALUES (%(image_name)s, %(user_id)s)"
-    #     return connectToMySQL(db_name).query_db(query, data)
 
     @classmethod
     def get_all(cls):
@@ -57,10 +60,25 @@ class Nft:
         query  = "DELETE FROM nfts WHERE id = %(id)s;"
         return connectToMySQL(db_name).query_db(query,data)
 
+    @classmethod
+    def update(cls, data):
+        query = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET image_name=%(image_name)s, collection_name=%(collection_name)s, token_number=%(token_number)s, collection_link_to_exchange=%(collection_link_to_exchange)s, purchase_price=%(purchase_price)s, date_of_purchase=%(date_of_purchase)s, trade_fees=%(trade_fees)s, has_staking=%(has_staking)s, notes=%(notes)s, is_for_sale=%(is_for_sale)s, sale_price=%(sale_price)s, link_to_sale=%(link_to_sale)s WHERE nfts.id = %(id)s;"
+        return connectToMySQL(db_name).query_db(query, data)
+
     # @classmethod
     # def update(cls, data):
-    #     query = "UPDATE table_name(s) SET name=%(name)s, last_name=%(last_name)s, updated_at=NOW() WHERE id = %(id)s;"
-    #     return connectToMySQL('database_file(sometimes a schema)').query_db(query, data)
+    #     query = "UPDATE nfts SET image_name=%(image_name)s, collection_name=%(collection_name)s, token_number=%(token_number)s, collection_link_to_exchange=%(collection_link_to_exchange)s, purchase_price=%(purchase_price)s, date_of_purchase=%(date_of_purchase)s, trade_fees=%(trade_fees)s, has_staking=%(has_staking)s, notes=%(notes)s, is_for_sale=%(is_for_sale)s, sale_price=%(sale_price)s, link_to_sale=%(link_to_sale)s WHERE id = %(id)s;"
+    #     return connectToMySQL(db_name).query_db(query, data)
+
+    # @classmethod
+    # def update(cls, data):
+    #     query  = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET image_name = %(image_name)s, collection_name=%(collection_name)s, user_id=%(user_id)s, updated_at=NOW() WHERE nfts.id = %(id)s;"
+    #     return connectToMySQL(db_name).query_db(query, data)
+
+    # @classmethod
+    # def update(cls, data):
+    #     query  = "UPDATE nfts SET image_name = %(image_name)s, collection_name=%(collection_name)s, user_id=%(user_id)s, WHERE id = %(id)s;"
+    #     return connectToMySQL(db_name).query_db(query, data)
 
     # @staticmethod
     # def validate_new_user(x):

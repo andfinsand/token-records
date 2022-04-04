@@ -70,12 +70,16 @@ body {
     /* background-color: #1A313C; */
     /* background-color: #282828; */
     background-image: linear-gradient(to right, #463A7B 5%, #221F45 60.83%);
-    border-radius: 40px;
+    border-radius: 50px;
     height: 90px;
 }
 
 .solana_ticker {
     background-color: transparent;
+}
+
+.solana_ticker span {
+    display: none;
 }
 
 /*************************************************** Main Container*********************************/
@@ -201,11 +205,14 @@ body {
 /********** Collection New Form Page **********/
 
 .collection_new_form_box_sub_div {
-    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    background-image: linear-gradient(150deg, #281E54 20%, #200D49 60%);
     border-radius: 30px;
 }
 
-
+.collection_new_form_purple_separator {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-radius: 30px;
+}
 
 /***************************************************** Resources ***********************************/
 
