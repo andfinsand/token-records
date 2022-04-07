@@ -3,20 +3,20 @@
 * {
     margin: 0px;
     padding: 0px;
-    font-family: "Play";
+    /* font-family: "Play";
+    font-weight: 700; */
 }
 
 body {
     background-color: #0F001B !important;
-    /* background-color: #1C1D25 !important; */
-    /* background-image: linear-gradient(180deg, #000000 58.98%, #A24CE5 100%); */
 }
 
-/*************************************************** Logo ************************************/
+/*************************************************** Logo **************************************************/
 
 .app_name {
     border-radius: 35px;
     background-image: linear-gradient(150deg, #443B7A 1%, #220F4B 40%);
+
 }
 
 .app_name_border {
@@ -29,21 +29,24 @@ body {
 .token_text {
     font-size: 36px;
     line-height: .8em;
+    font-family: "Play";
+    font-weight: 700;
 }
 
 .records_text {
     font-size: 36px;
     line-height: .8em;
+    font-family: "Play";
+    font-weight: 700;
 }
 
-/***************************************************Sidebar ************************************/
+/***************************************************Sidebar *********************************************/
 
 .sidebar {
-    /* background-color: #282828; */
     background-image: linear-gradient(180deg, #221F45 58.98%, #463A7B 100%);
     height: 100vh;
     padding-top: 80px;
-    /* min-width: 220px; */
+    font-family: "Play";
 }
 
 .sidebar_highlight_box {
@@ -60,15 +63,14 @@ body {
     font-size: 18px;
 }
 
-/***************************************************Top Navbar ************************************/
+/***************************************************Top Navbar **********************************************/
 
 .top_navbar_box {
     background-color: #0F001B;
 }
 
 .top_navbar {
-    /* background-color: #1A313C; */
-    /* background-color: #282828; */
+    font-family: "Play";
     background-image: linear-gradient(to right, #463A7B 5%, #221F45 60.83%);
     border-radius: 50px;
     height: 90px;
@@ -82,10 +84,11 @@ body {
     display: none;
 }
 
-/*************************************************** Main Container*********************************/
+/*************************************************** Main Container*********************************************/
 
 .container {
     margin: 0px;
+    font-family: "Play";
 }
 
 .add_new_box {
@@ -106,22 +109,21 @@ body {
     height: 220px !important;
 }
 
+.click_to_view_info_box {
+    font-family: "Kanit" !important;
+
+}
+
 /************************************************************* View *********************************************/
 
 .view_main_div {
     background-image: linear-gradient(150deg, #281E54 20%, #200D49 60%);
     border-radius: 40px;
+    font-family: "Kanit";
 }
 
-/* .view_nft_image_div {
-    background-color: #10273D;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-
-} */
-
 .nft_thumb {
-    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    background-image: linear-gradient(20deg, #37366B 20%, #3B265C 55%);
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
@@ -145,12 +147,25 @@ body {
     height: 290px;
 }
 
+/* .view_collection_name {
+    font-family: "Play";
+    font-weight: 700 !important;
+} */
+
 .view_right_info_div {
     background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
     border-radius: 25px;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
     width: 370px;
     height: 370px;
+}
+
+.view_right_info_div_sold {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-radius: 25px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
+    width: 370px;
+    height: 330px;
 }
 
 .view_calculator {
@@ -161,11 +176,33 @@ body {
     height: 265px;
 }
 
+.view_returns_sold {
+    background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
+    border-radius: 25px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
+    width: 370px;
+    height: 305px;
+}
+
+.view_trade_fees_sold {
+    opacity: 50%;
+}
+
 .view_calculator_main {
     background-color: #3B5173;
     border-radius: 15px;
     height: 140px;
 }
+
+.view_profit_sold {
+    background-color: #3B5173;
+    border-radius: 15px;
+    height: 55px;
+}
+
+/* .profit_text {
+    font-family: "Play" !important;
+} */
 
 .view_calculator_types {
     height: 20px;
@@ -175,6 +212,21 @@ body {
     background-color: #3B5173;
     border-radius: 15px;
     height: 90px;
+}
+
+.sold_button-size {
+    font-size: 16px;
+}
+
+/***************************************************** New *********************************************************/
+
+
+.input_box_xsmall {
+    width: 80px !important;
+}
+
+.input_box_small {
+    width: 180px !important;
 }
 
 /***************************************************** Index Page *****************************************************/
@@ -207,18 +259,23 @@ body {
 .collection_new_form_box_sub_div {
     background-image: linear-gradient(150deg, #281E54 20%, #200D49 60%);
     border-radius: 30px;
+    font-family: "Kanit" !important;
+    /* font-weight: 700; */
 }
 
 .collection_new_form_purple_separator {
     background-image: linear-gradient(150deg, #37366B 20%, #3B265C 90%);
     border-radius: 30px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.44);
+    font-family: "Kanit" !important;
+    /* font-weight: 700; */
 }
 
-/***************************************************** Resources ***********************************/
+/***************************************************** Resources *******************************************************/
 
 .resource_links_form_box {
     height: 80vh;
-    background-color: #1A313C;
+    background-image: linear-gradient(150deg, #281E54 20%, #200D49 60%);
     border-radius: 30px;
 }
 
