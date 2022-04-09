@@ -180,10 +180,10 @@
                                 <div class = "d-flex justify-content-between px-3 py-2">
                                     {% if nft.sale_price > nft.purchase_price %}
                                     <h2 class = "profit_text"><span style = "color: #00FF19">Profit</span></h2>
-                                    <h2>{{nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100))|round|int}}<span style = "color: #02FFB3"> SOL</span></h2>
+                                    <h2>{{nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100))}}<span style = "color: #02FFB3"> SOL</span></h2>
                                     {% else %}
                                     <h2 class = "text-danger">Loss</h2>
-                                    <h2>{{nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100))|round|int}}<span style = "color: #02FFB3"> SOL</span></h2>
+                                    <h2>{{nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100))}}<span style = "color: #02FFB3"> SOL</span></h2>
 
                                     {% endif %}
                                 </div>
