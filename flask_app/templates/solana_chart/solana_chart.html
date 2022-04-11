@@ -13,49 +13,9 @@
 </head>
 <body>
 
-    <!--------------------------------------------- Sidebar ---------------------------------------------------->
+<!-- ############################################################ Top Navbar ############################################################ -->
 
-    <div class = "sidebar position-fixed col-2 text-light text-center p-2">
-
-        <!-- App Name -->
-    <div class = "app_name_border m-2">
-        <div class = "app_name text-center font-weight-bold p-1 py-2"><a class = "text-decoration-none" href = "/collection">
-            <h1 class = "token_text"><span style = "color: #A24CE5">Token </span></h1>
-            <h1 class = "records_text"><span style = "color: #02FFB3">Records</span></h1>
-        </a></div>
-    </div>
-
-    <!-- Routes Pages-->
-    <div class = "side_bar_route_box d-flex flex-column justify-content-between">
-        <div>
-            <div class = "side_bar_collection pt-5 px-4"><a class = "text-decoration-none text-light" href = "/collection">
-                <h5 class = "font-weight-bold p-3">Collection</h5>
-            </a></div>
-            <div class = "side_bar_sold px-2"><a class = "text-decoration-none text-light" href = "/sold">
-                <h5 class = "font-weight-bold p-3">Sold</h5>
-            </a></div>
-            <div class = "side_bar_watchlist px-2">
-                <h5 class = "font-weight-bold p-3">Watchlist</h5>
-            </div>
-            <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
-                <h5 class = "font-weight-bold p-3">Resources</h5>
-            </a></div>
-            <div class = "side_bar_solana_chart px-4"><a class = "text-decoration-none text-light" href = "/solana_chart">
-                <h5 class = "sidebar_highlight_box font-weight-bold py-3">Solana Chart</h5>
-            </a></div>
-        </div>
-        <div class ="logout_button_box">
-            <a href="/logout" class = "logout_button text-light text-decoration-none">Logout</a>
-        </div>
-    </div>
-</div>
-
-<!-- *********************************************************Top Navbar******************************************************** -->
-
-<div class = "container col-10 mr-0 p-0">
-
-    <!-- Top Navbar -->
-    <div class = "top_navbar_box fixed-top pt-3 px-4 offset-2">
+    <div class = "top_navbar_box fixed-top pt-3 pb-1 px-4 offset-2">
         <div class = "top_navbar d-flex justify-content-between">
             <div class = "solana_ticker">
 
@@ -75,23 +35,59 @@
                 </div>
             </div>
 
-            <!-- TradingView Widget END -->
-
-            <!-- Default Links top navbar -->
+            <!-- Default Links Top Navbar -->
 
             <div class = "navbar_links d-flex align-items-center">
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://magiceden.io/">Magic Eden</a></h3>
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanart.io/">Solanart</a></h3>
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanafloor.com/">Solana Floor</a></h3>
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://sols.watch/">Sols Watch</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://magiceden.io/" target="_blank">Magic Eden</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanart.io/" target="_blank">Solanart</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://opensea.io/" target="_blank">OpenSea</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://sols.watch/" target="_blank">Sols Watch</a></h3>
             </div>
         </div>
     </div>
 
-<!-- ***************************************************************** -->
+<!--############################################################ Sidebar ############################################################ -->
 
-        <!-- Main content div box -->
+    <div class = "sidebar position-fixed col-2 text-light text-center p-2">
 
+        <!-- App Name -->
+
+        <div class = "app_name_border m-2">
+            <div class = "app_name text-center font-weight-bold p-1 py-2"><a class = "text-decoration-none" href = "/collection">
+                <h1 class = "token_text"><span style = "color: #A24CE5">Token </span></h1>
+                <h1 class = "records_text"><span style = "color: #02FFB3">Records</span></h1>
+            </a></div>
+        </div>
+
+        <!-- Routes Pages-->
+
+        <div class = "side_bar_route_box d-flex flex-column justify-content-between">
+            <div>
+                <div class = "side_bar_collection pt-5 px-4"><a class = "text-decoration-none text-light" href = "/collection">
+                    <h5 class = "font-weight-bold p-3">Collection</h5>
+                </a></div>
+                <div class = "side_bar_sold px-4"><a class = "text-decoration-none text-light" href = "/sold">
+                    <h5 class = "font-weight-bold p-3">Sold</h5>
+                </a></div>
+                <div class = "side_bar_watchlist px-2"><a class = "text-decoration-none text-light" href = "/watchlist">
+                    <h5 class = "font-weight-bold p-3">Watchlist</h5>
+                </a></div>
+                <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
+                    <h5 class = "font-weight-bold p-3">Resources</h5>
+                </a></div>
+                <div class = "side_bar_solana_chart px-4"><a class = "text-decoration-none text-light" href = "/solana_chart">
+                    <h5 class = "sidebar_highlight_box font-weight-bold py-3">Solana Chart</h5>
+                </a></div>
+            </div>
+            <div class ="logout_button_box">
+                <a href="/logout" class = "logout_button text-light text-decoration-none">Logout</a>
+            </div>
+        </div>
+    </div>
+
+<!-- ######################################################### Main Content ############################################################ -->
+
+    <div class = "container col-10 mr-0 p-0">
         <div class = "main_content">
             <div>
                 <p class = "collection_title text-light text-center font-weight-bold mt-5 mb-0">Solana Chart</p>

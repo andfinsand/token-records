@@ -65,13 +65,13 @@
         <div class = "side_bar_route_box d-flex flex-column justify-content-between">
             <div>
                 <div class = "side_bar_collection pt-5 px-4"><a class = "text-decoration-none text-light" href = "/collection">
-                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Collection</h5>
+                    <h5 class = "font-weight-bold p-3">Collection</h5>
                 </a></div>
                 <div class = "side_bar_sold px-4"><a class = "text-decoration-none text-light" href = "/sold">
                     <h5 class = "font-weight-bold p-3">Sold</h5>
                 </a></div>
-                <div class = "side_bar_watchlist px-2"><a class = "text-decoration-none text-light" href = "/watchlist">
-                    <h5 class = "font-weight-bold p-3">Watchlist</h5>
+                <div class = "side_bar_watchlist px-4"><a class = "text-decoration-none text-light" href = "/watchlist">
+                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Watchlist</h5>
                 </a></div>
                 <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
                     <h5 class = "font-weight-bold p-3">Resources</h5>
@@ -91,12 +91,12 @@
     <div class = "container col-10 mr-0 p-0">
         <div class = "main_content">
             <div>
-                <p class = "collection_title text-light text-center font-weight-bold mb-0 pt-5">Collection</p>
+                <p class = "collection_title text-light text-center font-weight-bold mb-0 pt-5">Watchlist</p>
             </div>
             <div class = "collection_new_form_box_main_div d-flex justify-content-center m-4">
                 <div class = "collection_new_form_box_sub_div col-8 text-light pt-2">
                     <h2 class = "collection_new_form_subtitle text-center mt-3"><span style = "color: #02FFB3">Enter Token Information</span></h2>
-                    <form action="/process_new_collection" method="POST" enctype="multipart/form-data">
+                    <form action="/process_new_watchlist" method="POST" enctype="multipart/form-data">
                         <div class = "flash_error">
                             {% with messages = get_flashed_messages() %}
                                 {% if messages %}
@@ -110,17 +110,19 @@
                         <!-- Top Section-->
 
                         <div class = "collection_new_form_purple_separator m-4 px-5 py-4">
-                            <!-- <h3 class = "collection_new_form_subtitle text-center "><span style = "color: #02FFB3">Enter token information</span></h3> -->
                             <!-- <h2 class = "collection_new_form_subtitle text-center text-light pb-2">Enter token information</h2> -->
                             <div class = "required_header pl-1">
                                 <h4 class = "text_required_optional"><span style = "color: #02FFB3">Required</span></h4>
                             </div>
                             <div>
-                                <input type = "hidden" name = "status" value = "0">
+                                <input type = "hidden" name = "status" value = "2">
+                            </div>
+                            <!-- <div>
+                                <input type = "hidden" name = "date_of_purchase" value = "0000-00-00">
                             </div>
                             <div>
                                 <input type = "hidden" name = "date_of_sale" value = "0000-00-00">
-                            </div>
+                            </div> -->
                             <div class = "user_input p-1">
                                 <label>Collection Name</label>
                                 <input class="form-control" type="text" name="collection_name">
@@ -134,15 +136,11 @@
                                 <input class="form-control" type="file" name="image">
                             </div>
                             <div class = "user_input p-1">
-                                <label>Purchase Price</label>
+                                <label>Price by Owner</label>
                                 <div class = "d-flex">
-                                    <input class="form-control input_box_xsmall" type="text" name="purchase_price">
+                                    <input class="form-control input_box_xsmall" type="text" name="sale_price">
                                     <h4 class = "mt-2 mb-0 mx-2"><span style = "color: #02FFB3">SOL</span></h4>
                                 </div>
-                            </div>
-                            <div class = "user_input p-1">
-                                <label>Date of Purchase</label>
-                                <input class="form-control input_box_small" type="date" name="date_of_purchase">
                             </div>
                         </div>
 
@@ -150,9 +148,16 @@
 
                         <div = class = "collection_new_form_purple_separator mt-4 mx-4 mb-0 px-5 py-4">
                             <div class = "required_header pl-1">
-                                <h4 class = "text_required_optional"><span style = "color: #02FFB3">Optional</span></h4>
+                                <h4><span style = "color: #02FFB3">Optional</span></h4>
                             </div>
-                            <div class = "row justify-content-around">
+                            <div class = "row justify-content-between px-3">
+                                <div class = "user_input p-1">
+                                    <label>My Bid</label>
+                                    <div class = "d-flex">
+                                        <input class="form-control input_box_xsmall" type="text" name="bid_price" value = "0">
+                                        <h4 class = "mt-2 mb-0 mx-2"><span style = "color: #02FFB3">SOL</span></h4>
+                                    </div>
+                                </div>
                                 <div class = "user_input p-1">
                                     <label>Trade Fees</label>
                                     <div class = "d-flex">
@@ -173,36 +178,16 @@
                                 </div>
                             </div>
                             <div class = "user_input p-1">
+                                <label>Link to Sale</label>
+                                <input class="form-control" type="text" name="link_to_sale">
+                            </div>
+                            <div class = "user_input p-1">
                                 <label>Link to Collection Page</label>
                                 <input class="form-control" type="text" name="collection_link_to_exchange">
                             </div>
                             <div class = "user_input p-1">
                                 <label>Notes</label>
                                 <input class="form-control" type="text" name="notes">
-                            </div>
-                            <div class = "user_input p-1">
-                                <label>Is the NFT listed for sale?</label>
-                                <div class = "form_check pl-4">
-                                    <input class="form-check-input" onclick = "hideForm()" type="radio" name="is_for_sale" id = "is_for_sale0" value="0" checked>
-                                    <label class = "form-check-label" onclick = "hideForm()" for = "is_for_sale0">No</label>
-                                </div>
-                                <div class = "form_check  pl-4">
-                                    <input class="form-check-input" onclick = "showForm()" type="radio" name="is_for_sale" id = "is_for_sale1" value="1">
-                                    <label class = "form-check-label" onclick = "showForm()" for = "is_for_sale1">Yes</label>
-                                </div>
-                                <div id = "forSale" style = "display: none">
-                                    <div class = "user_input p-1">
-                                        <label>For Sale Price</label>
-                                        <div class = "d-flex">
-                                            <input class="form-control input_box_xsmall" type="text" name="sale_price" value = "0">
-                                            <h4 class = "mt-2 mb-0 mx-2"><span style = "color: #02FFB3">SOL</span></h4>
-                                        </div>
-                                    </div>
-                                    <div class = "user_input p-1">
-                                        <label>For Sale Link</label>
-                                        <input class="form-control" type="text" name="link_to_sale">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class = "text-center">

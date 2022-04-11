@@ -64,13 +64,13 @@
         <div class = "side_bar_route_box d-flex flex-column justify-content-between">
             <div>
                 <div class = "side_bar_collection pt-5 px-4"><a class = "text-decoration-none text-light" href = "/collection">
-                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Collection</h5>
+                    <h5 class = "font-weight-bold p-3">Collection</h5>
                 </a></div>
                 <div class = "side_bar_sold px-4"><a class = "text-decoration-none text-light" href = "/sold">
                     <h5 class = "font-weight-bold p-3">Sold</h5>
                 </a></div>
-                <div class = "side_bar_watchlist px-2"><a class = "text-decoration-none text-light" href = "/watchlist">
-                    <h5 class = "font-weight-bold p-3">Watchlist</h5>
+                <div class = "side_bar_watchlist px-4"><a class = "text-decoration-none text-light" href = "/watchlist">
+                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Watchlist</h5>
                 </a></div>
                 <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
                     <h5 class = "font-weight-bold p-3">Resources</h5>
@@ -90,31 +90,39 @@
     <div class = "container col-10 mr-0 p-0">
         <div class = "main_content container">
             <div>
-                <p class = "collection_title text-light text-center font-weight-bold mt-5 mb-0">Collection</p>
+                <p class = "collection_title text-light text-center font-weight-bold mt-5 mb-0">Watchlist</p>
             </div>
             <div class = "add_new_box text-center">
-                <a href = "/collection_new" class = "add_nft text-center font-weight-bold text-decoration-none"><span style = "color: #02FFB3">+ Add NFT</span></a>
+                <a href = "/watchlist_new" class = "add_nft text-center font-weight-bold text-decoration-none"><span style = "color: #02FFB3">+ Add NFT</span></a>
             </div>
             <div class = "main_content_display_all container">
                 <div class = "main_row row text-center pl-4">
                     {% for nft in nfts %}
-                        {% if nft.status == 0 %}
+                        {% if nft.status == 2 %}
                             {% if nft.user_id == session.user_id %}
                                 <div class = "click_to_view_div p-4">
                                     <div class = "click_to_view_info_box_background">
                                         <div class = "click_to_view text-light mt-5 mb-5">
-                                            <a href = "/collection_view/{{nft.id}}" class = "nft_image font-weight-bold text-decoration-none"><img class = "img" src = "{{ url_for('static' , filename = 'uploads/' + nft.image_name) }}"></a>
-                                            <div class = "click_to_view_info_box">
-                                                <h5 class = "overflow px-2 pt-2">{{nft.collection_name}}</h5>
-                                                <h6>#{{nft.token_number}}</h6>
+                                            <a href = "/watchlist_view/{{nft.id}}" class = "nft_image font-weight-bold text-decoration-none"><img class = "img" src = "{{ url_for('static' , filename = 'uploads/' + nft.image_name) }}"></a>
+                                            <div class = "click_to_view_info_box d-flex flex-column justify-content-between pb-1 mb-2">
+                                                <div>
+                                                    <h5 class = "overflow mb-0 px-2 pt-2">{{nft.collection_name}}</h5>
+                                                    <h6>#{{nft.token_number}}</h6>
+                                                </div>
+                                                <div>
+                                                {% if nft.bid_price > 0 %}
+                                                    <div class = "d-flex justify-content-between px-4">
+                                                        <h6 class = "click_to_view_content mb-0"><span style = "color: #A24CE5">My Bid</span></h6>
+                                                        <h6 class = "click_to_view_content mb-0"><span style = "color: #A24CE5"> {{nft.bid_price}} SOL</span></h6>
+                                                    </div>
+                                                {% endif %}
                                                 {% if nft.sale_price > 0 %}
-                                                    <div class = "d-flex justify-content-around px-2 pt-2">
-                                                        <h6 class = "click_to_view_content"><span style = "color: #02FFB3">For Sale</span></h6>
+                                                    <div class = "d-flex justify-content-between px-4">
+                                                        <h6 class = "click_to_view_content"><span style = "color: #02FFB3">Sale Price</span></h6>
                                                         <h6 class = "click_to_view_content"><span style = "color: #02FFB3"> {{nft.sale_price}} SOL</span></h6>
                                                     </div>
-                                                {% elif nft.has_staking == 1 %}
-                                                    <h6 class = "click_to_view_content pt-2"><span style = "color: #02FFB3">Staked</span></h6>
                                                 {% endif %}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -125,8 +133,6 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </body>
 </html>

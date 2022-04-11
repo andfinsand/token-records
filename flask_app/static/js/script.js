@@ -14,16 +14,10 @@ function hideFormEdit() {
     document.getElementById('forSaleEdit').style.display = 'none';
 }
 
-function soldAlert() {
-    confirm("Press");
+function showFormFromWatchlist() {
+    document.getElementById('forSaleFromWatchlist').style.display = 'block';
 }
 
-// function soldAlert(element) {
-//     var txt;
-//     if (confirm("Press a button!")) {
-//         txt = "You pressed OK!";
-//     } else {
-//         txt = "You pressed Cancel!";
-//     }
-    
-// }
+function hideFormFromWatchlist() {
+    document.getElementById('forSaleFromWatchlist').style.display = 'none';
+}

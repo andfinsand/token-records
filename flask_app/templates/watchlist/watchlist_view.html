@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400&family=Play:wght@400;700&family=Roboto:wght@400;500&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <script src="static\js\script.js"></script>
 </head>
 <body>
 
@@ -67,10 +68,10 @@
                     <h5 class = "font-weight-bold p-3">Collection</h5>
                 </a></div>
                 <div class = "side_bar_sold px-4"><a class = "text-decoration-none text-light" href = "/sold">
-                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Sold</h5>
+                    <h5 class = "font-weight-bold p-3">Sold</h5>
                 </a></div>
-                <div class = "side_bar_watchlist px-2"><a class = "text-decoration-none text-light" href = "/watchlist">
-                    <h5 class = "font-weight-bold p-3">Watchlist</h5>
+                <div class = "side_bar_watchlist px-4"><a class = "text-decoration-none text-light" href = "/watchlist">
+                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Watchlist</h5>
                 </a></div>
                 <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
                     <h5 class = "font-weight-bold p-3">Resources</h5>
@@ -90,12 +91,13 @@
     <div class = "container col-10 mr-0 p-0">
         <div class = "main_content container d-inline_flex justify-content-center">
             <div class = "row justify-content-center">
-                <p class = "collection_title text-light font-weight-bold mb-0 pt-5">Sold</p>
+                <p class = "collection_title text-light font-weight-bold mb-0 pt-5">Watchlist</p>
             </div>
             <div class = "view_main_div_div d-flex justify-content-center">
                 <div class = "view_main_div row col-10 justify-content-around m-4 pb-3">
 
                 <!-- Left column div box -->
+
                     <div class = "view_main_col m-2 mb-3">
                         <div class = "view_nft_image_div mx-2 mt-4">
 
@@ -108,19 +110,16 @@
                                     <h2>#{{nft.token_number}}</h2>
                                 </div>
                                 <div class = "view_project_site m-3">
-                                    <h5><a class = "text-decoration-none text-light" href = "{{ nft.collection_link_to_exchange }}">View on Exchange</a></h5>
+                                    <h5><a class = "text-decoration-none text-light" href = "{{ nft.collection_link_to_exchange }}" target="_blank">View on Exchange</a></h5>
                                 </div>
                                 <div class = "view_edit m-3">
-                                    <h5><a href = "/sold/edit/{{nft.id}}" class = "text-decoration-none"><span style = "color: #02FFB3">Edit</span></a></h5>
+                                    <h5><a href = "/watchlist/edit/{{nft.id}}" class = "text-decoration-none"><span style = "color: #02FFB3">Edit</span></a></h5>
                                 </div>
                             </div>
                             <div class = "view_delete_sold d-flex justify-content-between m-2">
                                 <div class = "mx-3">
-                                    <h6><a href="/destroy_sold/nft/{{nft.id}}" class = "text-danger text-decoration-none">Delete</a></h6>
+                                    <h6><a href="/destroy_watchlist/nft/{{nft.id}}" class = "text-danger text-decoration-none">Delete</a></h6>
                                 </div>
-                                <!-- <div class = "mx-3">
-                                    <h6>Sold</h6>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -128,17 +127,31 @@
                     <!-- Right column div box -->
 
                     <div class = "view_main_col text-light m-2 mb-3">
-                        <div class = "view_right_info_div_sold d-flex flex-column justify-content-between pb-1 mx-2 mt-4">
+                        <div class = "view_right_info_div d-flex flex-column justify-content-between pb-1 mx-2 mt-4">
                             <div class = "top_half">
                                 <div class = "view_collection_name text-center m-2 pt-3 pb-2">
-                                    <h2><span style = "color: #02FFB3">{{nft.collection_name}}</span></h2>
+                                    <h2 class = "font_size_change"><span style = "color: #02FFB3">{{nft.collection_name}}</span></h2>
                                 </div>
-                                <div class = "view_sale_date d-flex justify-content-between px-4">
-                                    <p>Date of Sale</p>
-                                    <p>{{nft.date_of_sale}}</p>
+                                <div class = "view_owner_price d-flex justify-content-between px-4">
+                                    <p>Price by Owner</p>
+                                    <div class = "d-flex">
+                                        <h4 class = "px-2">{{nft.sale_price}}</h4>
+                                        <h4><span style = "color: #02FFB3">SOL</span></h4>
+                                    </div>
+                                </div>
+                                <div class = "view_bid d-flex justify-content-between px-4">
+                                    <p>My Bid</p>
+                                    <div class = "d-flex">
+                                        {% if nft.bid_price == 0 %}
+                                            <p>None</p>
+                                        {% else %}
+                                            <h4 class = "px-2">{{nft.bid_price}}</h4>
+                                            <h4><span style = "color: #02FFB3">SOL</span></h4>
+                                        {% endif %}
+                                    </div>
                                 </div>
                                 <div class = "view_staking_option d-flex justify-content-between px-4">
-                                    <p>Had Staking</p>
+                                    <p>Staking</p>
                                     {% if nft.has_staking == 0 %}
                                         <p>None</p>
                                     {% else %}
@@ -153,38 +166,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class = "view_returns_sold mx-2 mt-4 p-2">
-                            <div class = "view_calculator_text text-center pt-3 pb-2">
-                                <h3><span style = "color: #02FFB3">Returns</span></h3>
+                        <div class = "view_watchlist_link_to_sale mx-2 mt-4">
+                            <div class = "text-center pt-4">
+                                <h5><a class = "text-decoration-none" href = "{{ nft.link_to_sale }}" target="_blank"><span style = "color: #02FFB3">Link to Sale</span></a></h5>
                             </div>
-                            <div class = "view_sale_price d-flex justify-content-between px-4 pb-2">
-                                <h6>Sale Price</h6>
-                                <h6>{{nft.sale_price}}<span style = "color: #02FFB3"> SOL</span></h6>
-                            </div>
-                            <div class = "view_purchase_price d-flex justify-content-between px-4 pb-2">
-                                <h6>Purchase Price</h6>
-                                <h6>-{{nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
-                            </div>
-                            <div class = "border_line border-top mx-5"></div>
-                            <div class = "view_purchase_price d-flex justify-content-between px-4 pt-3">
-                                <h6>Net Total</h6>
-                                <h6>{{nft.sale_price - nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
-                            </div>
-                            <div class = "view_trade_fees_sold d-flex justify-content-between px-4 pb-2">
-                                <h7>Fees</h7>
-                                <h7>-{{nft.trade_fees}}<span style = "color: #02FFB3"> %</span></h7>
-                            </div>
-                            <div class = "view_profit_sold mt-1 mx-3">
-                                <div class = "d-flex justify-content-between px-3 py-2">
-                                    {% if nft.sale_price > nft.purchase_price %}
-                                    <h2 class = "profit_text"><span style = "color: #00FF19">Profit</span></h2>
-                                    <h2>+{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h2>
-                                    {% else %}
-                                    <h2 class = "text-danger">Loss</h2>
-                                    <h2>{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h2>
-
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div class = "view_watchlist_add_to_collection mx-2 mt-4">
+                            <div class = "text-center pt-5">
+                                <h4>Successfully Purchased</h4>
+                                <h5><a href = "/collection/collection_from_watchlist/{{nft.id}}" class="sold_button_size text-light text-decoration-none" onclick = "alert('Congratulations! Once confirmed, this NFT will be removed from the Watchlist page.')"><span style = "color: #02FFB3">Add to Collection</span></a></h5>
                             </div>
                         </div>
                     </div>
@@ -194,11 +184,3 @@
     </div>
 </body>
 </html>
-
-<!-- <div class = "view__purchase_price d-flex justify-content-between px-4">
-    <p>Purchase Price</p>
-    <div class = "view__purchase_price_value d-flex">
-        <h4 class = "px-2">{{nft.purchase_price}}</h4>
-        <h4><span style = "color: #02FFB3">SOL</span></h4>
-    </div>
-</div> -->

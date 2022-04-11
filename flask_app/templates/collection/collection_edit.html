@@ -14,49 +14,9 @@
 </head>
 <body>
 
-    <!--------------------------------------------- Sidebar ---------------------------------------------------->
+<!-- ############################################################ Top Navbar ############################################################ -->
 
-    <div class = "sidebar position-fixed col-2 text-light text-center p-2">
-
-        <!-- App Name -->
-    <div class = "app_name_border m-2">
-        <div class = "app_name text-center font-weight-bold p-1 py-2"><a class = "text-decoration-none" href = "/collection">
-            <h1 class = "token_text"><span style = "color: #A24CE5">Token </span></h1>
-            <h1 class = "records_text"><span style = "color: #02FFB3">Records</span></h1>
-        </a></div>
-    </div>
-
-    <!-- Routes Pages-->
-    <div class = "side_bar_route_box d-flex flex-column justify-content-between">
-        <div>
-            <div class = "side_bar_collection pt-5 px-4"><a class = "text-decoration-none text-light" href = "/collection">
-                <h5 class = "sidebar_highlight_box font-weight-bold p-3">Collection</h5>
-            </a></div>
-            <div class = "side_bar_sold px-2"><a class = "text-decoration-none text-light" href = "/sold">
-                <h5 class = "font-weight-bold p-3">Sold</h5>
-            </a></div>
-            <div class = "side_bar_watchlist px-2">
-                <h5 class = "font-weight-bold p-3">Watchlist</h5>
-            </div>
-            <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
-                <h5 class = "font-weight-bold p-3">Resources</h5>
-            </a></div>
-            <div class = "side_bar_solana_chart px-2"><a class = "text-decoration-none text-light" href = "/solana_chart">
-                <h5 class = "font-weight-bold py-3">Solana Chart</h5>
-            </a></div>
-        </div>
-        <div class ="logout_button_box">
-            <a href="/logout" class = "logout_button text-light text-decoration-none">Logout</a>
-        </div>
-    </div>
-</div>
-
-<!-- *********************************************************Top Navbar******************************************************** -->
-
-<div class = "container col-10 mr-0 p-0">
-
-    <!-- Top Navbar -->
-    <div class = "top_navbar_box fixed-top pt-3 px-4 offset-2">
+    <div class = "top_navbar_box fixed-top pt-3 pb-1 px-4 offset-2">
         <div class = "top_navbar d-flex justify-content-between">
             <div class = "solana_ticker">
 
@@ -76,30 +36,66 @@
                 </div>
             </div>
 
-            <!-- TradingView Widget END -->
-
-            <!-- Default Links top navbar -->
+            <!-- Default Links Top Navbar -->
 
             <div class = "navbar_links d-flex align-items-center">
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://magiceden.io/">Magic Eden</a></h3>
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanart.io/">Solanart</a></h3>
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanafloor.com/">Solana Floor</a></h3>
-                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://sols.watch/">Sols Watch</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://magiceden.io/" target="_blank">Magic Eden</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://solanart.io/" target="_blank">Solanart</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://opensea.io/" target="_blank">OpenSea</a></h3>
+                <h5 class = "font-weight-bold text-light m-5"><a class = "text-light text-decoration-none" href = "https://sols.watch/" target="_blank">Sols Watch</a></h3>
             </div>
         </div>
     </div>
 
-<!-- ***************************************************************** -->
+<!--############################################################ Sidebar ############################################################ -->
 
-        <!-- Main content div box -->
+    <div class = "sidebar position-fixed col-2 text-light text-center p-2">
 
+        <!-- App Name -->
+
+        <div class = "app_name_border m-2">
+            <div class = "app_name text-center font-weight-bold p-1 py-2"><a class = "text-decoration-none" href = "/collection">
+                <h1 class = "token_text"><span style = "color: #A24CE5">Token </span></h1>
+                <h1 class = "records_text"><span style = "color: #02FFB3">Records</span></h1>
+            </a></div>
+        </div>
+
+        <!-- Routes Pages-->
+
+        <div class = "side_bar_route_box d-flex flex-column justify-content-between">
+            <div>
+                <div class = "side_bar_collection pt-5 px-4"><a class = "text-decoration-none text-light" href = "/collection">
+                    <h5 class = "sidebar_highlight_box font-weight-bold p-3">Collection</h5>
+                </a></div>
+                <div class = "side_bar_sold px-4"><a class = "text-decoration-none text-light" href = "/sold">
+                    <h5 class = "font-weight-bold p-3">Sold</h5>
+                </a></div>
+                <div class = "side_bar_watchlist px-2"><a class = "text-decoration-none text-light" href = "/watchlist">
+                    <h5 class = "font-weight-bold p-3">Watchlist</h5>
+                </a></div>
+                <div class = "side_bar_resources px-2"><a class = "text-decoration-none text-light" href = "/resources">
+                    <h5 class = "font-weight-bold p-3">Resources</h5>
+                </a></div>
+                <div class = "side_bar_solana_chart px-2"><a class = "text-decoration-none text-light" href = "/solana_chart">
+                    <h5 class = "font-weight-bold py-3">Solana Chart</h5>
+                </a></div>
+            </div>
+            <div class ="logout_button_box">
+                <a href="/logout" class = "logout_button text-light text-decoration-none">Logout</a>
+            </div>
+        </div>
+    </div>
+
+<!-- ######################################################### Main Content ############################################################ -->
+
+    <div class = "container col-10 mr-0 p-0">
         <div class = "main_content">
             <div>
                 <p class = "collection_title text-light text-center font-weight-bold mb-0 pt-5">Collection</p>
             </div>
             <div class = "collection_new_form_box_main_div d-flex justify-content-center m-4">
                 <div class = "collection_new_form_box_sub_div col-8 text-light pt-2">
-                    <h3 class = "collection_new_form_subtitle text-center mt-2"><span style = "color: #02FFB3">Edit token information</span></h3>
+                    <h2 class = "collection_new_form_subtitle text-center mt-2"><span style = "color: #02FFB3">Edit token information</span></h2>
                     <form action="/process_edit_collection" method="POST" enctype="multipart/form-data">
                         <div class = "flash_error">
                             {% with messages = get_flashed_messages() %}
@@ -112,9 +108,10 @@
                         </div>
 
                         <!-- Top Section-->
+
                         <div class = "collection_new_form_purple_separator m-4 px-5 py-4">
                             <div class = "required_header pl-1">
-                                <h4><span style = "color: #02FFB3">Required</span></h4>
+                                <h4 class = "text_required_optional"><span style = "color: #02FFB3">Required</span></h4>
                             </div>
                             <div>
                                 <input type = "hidden" name = "nft_id" value = "{{edit.id}}">
@@ -154,36 +151,38 @@
 
                         <div = class = "collection_new_form_purple_separator mt-4 mx-4 mb-0 px-5 py-4">
                             <div class = "required_header pl-1">
-                                <h4><span style = "color: #02FFB3">Optional</span></h4>
+                                <h4 class = "text_required_optional"><span style = "color: #02FFB3">Optional</span></h4>
                             </div>
-                            <div class = "user_input p-1">
-                                <label>Trade Fees</label>
-                                <div class = "d-flex">
-                                    <input class="form-control input_box_xsmall" type="text" name="trade_fees" value = "{{edit.trade_fees}}">
-                                    <h4 class = "mt-2 mb-0 mx-2">%</h4>
+                            <div class = "row justify-content-around">
+                                <div class = "user_input p-1">
+                                    <label>Trade Fees</label>
+                                    <div class = "d-flex">
+                                        <input class="form-control input_box_xsmall" type="text" name="trade_fees" value = "{{edit.trade_fees}}">
+                                        <h4 class = "mt-2 mb-0 mx-2">%</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class = "user_input p-1">
-                                <label>Staking Feature?</label>
-                                {% if edit.has_staking == 0 %}
-                                    <div class = "form_check pl-4">
-                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking0" value = "0" checked>
-                                        <label class = "form-check-label" for = "has_staking0">No</label>
-                                    </div>
-                                    <div class = "form_check  pl-4">
-                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking1" value = "1">
-                                        <label class = "form-check-label" for = "has_staking1">Yes</label>
-                                    </div>
-                                {% else %}
-                                    <div class = "form_check pl-4">
-                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking0" value = "0">
-                                        <label class = "form-check-label" for = "has_staking0">No</label>
-                                    </div>
-                                    <div class = "form_check  pl-4">
-                                        <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking1" value = "1" checked>
-                                        <label class = "form-check-label" for = "has_staking1">Yes</label>
-                                    </div>
-                                {% endif %}
+                                <div class = "user_input p-1">
+                                    <label>Staking Feature?</label>
+                                    {% if edit.has_staking == 0 %}
+                                        <div class = "form_check pl-4">
+                                            <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking0" value = "0" checked>
+                                            <label class = "form-check-label" for = "has_staking0">No</label>
+                                        </div>
+                                        <div class = "form_check  pl-4">
+                                            <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking1" value = "1">
+                                            <label class = "form-check-label" for = "has_staking1">Yes</label>
+                                        </div>
+                                    {% else %}
+                                        <div class = "form_check pl-4">
+                                            <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking0" value = "0">
+                                            <label class = "form-check-label" for = "has_staking0">No</label>
+                                        </div>
+                                        <div class = "form_check  pl-4">
+                                            <input class="form-check-input" type = "radio" name = "has_staking" id = "has_staking1" value = "1" checked>
+                                            <label class = "form-check-label" for = "has_staking1">Yes</label>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class = "user_input p-1">
                                 <label>Link to Collection Page</label>
