@@ -97,23 +97,19 @@ def update_watchlist():
 
     data = {
         "nft_id" : request.form["nft_id"],
-        "image_name" : image.filename,
         "status" : request.form["status"],
         "collection_name" : request.form['collection_name'],
         "token_number": request.form['token_number'],
         "collection_link_to_exchange": request.form['collection_link_to_exchange'],
-        "purchase_price": request.form['purchase_price'],
-        "date_of_purchase": request.form['date_of_purchase'],
-        "date_of_sale": request.form['date_of_sale'],
         "trade_fees": request.form['trade_fees'],
+        "bid_price": request.form['bid_price'],
         "has_staking": request.form['has_staking'],
         "notes": request.form['notes'],
-        "is_for_sale": request.form['is_for_sale'],
         "sale_price": request.form['sale_price'],
         "link_to_sale": request.form['link_to_sale'],
         "user_id": session["user_id"]
     }
-    Nft.update(data)
+    Nft.update_watchlist(data)
     return redirect('/watchlist')
 
 ############################################# Watchlist View #############################################

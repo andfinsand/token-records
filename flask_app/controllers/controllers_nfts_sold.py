@@ -90,6 +90,54 @@ def process_new_sold():
 
     return redirect('/sold')
 
+############################################################ Edit Sold ####################################################
+
+@app.route('/sold/edit/<int:id>')
+def edit_sold(id):
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data = {
+        "id":id
+    }
+    user_data = {
+        "id" : session['user_id']
+    }
+    return render_template('sold/sold_edit.html', edit = Nft.get_by_id(data) , user=User.get_by_id(user_data))
+
+###########################################3########### Process Edit Collection Form ################################################
+
+@app.route('/process_edit_sold', methods=['POST'])
+def update_sold():
+    if 'user_id' not in session:
+        return redirect('/logout')
+
+    # if not Nft.validate_title(request.form):
+    #     page = request.form['id']
+    #     return redirect (f'/main/edit/{page}')
+
+    if request.files:
+        image = request.files["image"]
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
+
+    data = {
+        "nft_id" : request.form["nft_id"],
+        "status" : request.form["status"],
+        "collection_name" : request.form['collection_name'],
+        "token_number": request.form['token_number'],
+        "collection_link_to_exchange": request.form['collection_link_to_exchange'],
+        "purchase_price": request.form['purchase_price'],
+        "date_of_purchase": request.form['date_of_purchase'],
+        "date_of_sale": request.form['date_of_sale'],
+        "trade_fees": request.form['trade_fees'],
+        "has_staking": request.form['has_staking'],
+        "notes": request.form['notes'],
+        "sale_price": request.form['sale_price'],
+        "link_to_sale": request.form['link_to_sale'],
+        "user_id": session["user_id"]
+    }
+    Nft.update_sold(data)
+    return redirect('/sold')
+
 ##################################################### Sold View ####################################################
 
 @app.route('/sold_view/<int:id>')

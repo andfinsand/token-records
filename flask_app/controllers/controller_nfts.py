@@ -3,6 +3,9 @@ from flask import render_template, redirect, session, request, flash, url_for
 from flask_app.models.user import User
 from flask_app.models.nft import Nft
 import os
+import requests
+import json
+import decimal
 
 UPLOAD_FOLDER = 'flask_app/static/uploads/'
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -20,11 +23,29 @@ def collection():
     data ={
         'id': session['user_id']
     }
+
+    ################# API TEST FLOOR PRICE BEGIN###########
+
+    url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
+
+    payload={}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    floor = json.loads(response.content)
+    floor_price = floor['floorPrice']
+    print(response.text)
+    def move_point(number, shift, base = 10):
+        return number * base**shift
+
+    new = move_point( floor_price , -9)
+
+################# API TEST FLOOR PRICE END###########
+
     user = User.get_by_id(data)
     nfts = Nft.get_all()
 
-
-    return render_template('/collection/collection.html' , user = user , nfts = nfts)
+    return render_template('/collection/collection.html' , user = user , nfts = nfts , floor = new)
 
 #################################################### Add new NFT Collection ########################################################
 
@@ -122,7 +143,6 @@ def update():
 
     data = {
         "nft_id" : request.form["nft_id"],
-        "image_name" : image.filename,
         "status" : request.form["status"],
         "collection_name" : request.form['collection_name'],
         "token_number": request.form['token_number'],
@@ -138,7 +158,7 @@ def update():
         "link_to_sale": request.form['link_to_sale'],
         "user_id": session["user_id"]
     }
-    Nft.update(data)
+    Nft.update_collection(data)
     return redirect('/collection')
 
 ##################################################### Collection VIEW NFT ########################################################
@@ -154,10 +174,30 @@ def collection_view(id):
         "id" : session['user_id']
     }
 
+################# API TEST FLOOR PRICE BEGIN###########
+
+    url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
+
+    payload={}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    floor = json.loads(response.content)
+    floor_price = floor['floorPrice']
+    print(response.text)
+    def move_point(number, shift, base = 10):
+        return number * base**shift
+
+    floor_math = decimal.Decimal(move_point( floor_price , -9))
+
+    # floor_display = move_point( floor_price , -9)
+
+################# API TEST FLOOR PRICE END###########
+
     nft = Nft.get_by_id(data)
     image = url_for('static' , filename = 'uploads/' + nft.image_name)
 
-    return render_template('/collection/collection_view.html' , user = User.get_by_id(user_data) , nft = nft , image = image)
+    return render_template('/collection/collection_view.html' , user = User.get_by_id(user_data) , nft = nft , image = image , floor = floor_math )
 
 ########################################################## COLLECTION FROM WATCHLIST ############################################
 
@@ -186,7 +226,6 @@ def process_from_watchlist():
 
     data = {
         "nft_id" : request.form["nft_id"],
-        "image_name" : image.filename,
         "status" : request.form["status"],
         "collection_name" : request.form['collection_name'],
         "token_number": request.form['token_number'],

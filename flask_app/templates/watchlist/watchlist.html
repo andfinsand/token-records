@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&family=Play:wght@400;700&family=Roboto:wght@400;500&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;500&family=Play:wght@400;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -111,13 +111,13 @@
                                                 </div>
                                                 <div>
                                                 {% if nft.bid_price > 0 %}
-                                                    <div class = "d-flex justify-content-between px-4">
+                                                    <div class = "d-flex justify-content-between px-3">
                                                         <h6 class = "click_to_view_content mb-0"><span style = "color: #A24CE5">My Bid</span></h6>
                                                         <h6 class = "click_to_view_content mb-0"><span style = "color: #A24CE5"> {{nft.bid_price}} SOL</span></h6>
                                                     </div>
                                                 {% endif %}
                                                 {% if nft.sale_price > 0 %}
-                                                    <div class = "d-flex justify-content-between px-4">
+                                                    <div class = "d-flex justify-content-between px-3">
                                                         <h6 class = "click_to_view_content"><span style = "color: #02FFB3">Sale Price</span></h6>
                                                         <h6 class = "click_to_view_content"><span style = "color: #02FFB3"> {{nft.sale_price}} SOL</span></h6>
                                                     </div>

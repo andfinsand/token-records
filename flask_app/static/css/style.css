@@ -118,7 +118,7 @@ body {
 }
 
 .click_to_view_content {
-    font-weight: 300;
+    font-weight: 200;
 }
 
 .click_to_view_info_box_background {
@@ -267,6 +267,15 @@ body {
 
 .input_box_small {
     width: 180px !important;
+}
+
+.new_submit_buttons {
+    font-size: 32px;
+    background-color: #A24CE5;
+    background-image: linear-gradient(to right, #9B5EFF 10%, rgba(136, 43, 255, 1) 90%);
+    box-shadow: 2px 3px 5px black;
+    border-radius: 15px;
+    padding: 1px 20px;
 }
 
 /***************************************************** Index Page *****************************************************/

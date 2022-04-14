@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400&family=Play:wght@400;700&family=Roboto:wght@400;500&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-    <script src="static\js\script.js"></script>
+    <!-- <script src="static\js\script.js"></script> -->
+    <script src="collection_script.js"></script>
 </head>
 <body>
 
@@ -165,57 +166,121 @@
 
 <!--#################################################### Calculator ###############################################################-->
 
-                        <div class = "view_calculator mx-2 mt-4">
+                        <div class = "view_calculator mx-2 mt-4 px-3">
                             <div class = "view_calculator_text text-center pt-3">
                                 <h3><span style = "color: #02FFB3">Calculator</span></h3>
                             </div>
 
-                        <!---- Not For Sale ---->
+                        <!--------- Not For Sale ----------->
 
                             <!-- For Sale Calc-->
 
                             {% if nft.is_for_sale == 0 %}
                                 <div class = "view_calculator_for_sale_types d-flex justify-content-between">
-                                    <p class = "mb-0 px-5">For Sale</p>
-                                    <p class = "font_opacity mb-0 px-5">Floor</p>
+                                    <button class = "mb-0 px-5 pb-1 text-decoration-none" onclick = "forSaleCalc1()" style = "border: none; background: none; outline: none;"><a class="text-light text-decoration-none"><span  id = "forSaleColor" style = "color: #02FFB3">For Sale</span></a></button>
+                                    <button class = "mb-0 px-5 pb-1 text-decoration-none" onclick = "floorCalc1()" style = "border: none; background: none; outline: none;"><a class="text-light text-decoration-none"><span  id = "floorColor">Floor</span></a></button>
                                 </div>
-                                <div class = "view_calculator_for_sale_main mt-1 mx-4 pt-3">
+
+                                    <!-- Floor Calc-->
+
+                                <div id = "floorCalculator" style = "display: none">
+                                    <div class = "border_line border-top mx-4"></div>
+                                    <div class = "view_sale_price d-flex justify-content-between px-4 pt-3">
+                                        <h6>Floor Price</h6>
+                                        <h6>{{floor}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                    </div>
+                                    <div class = "view_purchase_price d-flex justify-content-between px-4">
+                                        <h6>Purchase Price</h6>
+                                        <h6>-{{nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                    </div>
+                                    <div class = "view_trade_fees_sold d-flex justify-content-between px-4">
+                                        <h7>Fees</h7>
+                                        <h7>-{{nft.trade_fees}}<span style = "color: #02FFB3"> %</span></h7>
+                                    </div>
+                                    <div class = "view_profit_sold mt-2 mx-3">
+                                        <div class = "d-flex justify-content-between px-3 py-3">
+                                            {% if floor > nft.purchase_price %}
+                                            <h5 class = "profit_text">Potential Profit</h5>
+                                            <h5>+{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+                                            {% else %}
+                                            <h5>Potential Loss</h5>
+                                            <h5>{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id = "forSaleCalculator" class = "view_calculator_for_sale_main mt-1 mx-3 pt-3">
                                     <div class = "view_calculator_unlisted text-center pt-5">Not Listed</div>
                                 </div>
                             {% endif %}
 
-                        <!---- Is For Sale ---->
+                        <!--------- Is For Sale ----------->
+
+                            {% if nft.is_for_sale == 1 %}
+                                <div class = "view_calculator_for_sale_types d-flex justify-content-between">
+                                    <button class = "mb-0 px-5 pb-1 text-decoration-none" onclick = "forSaleCalc1()" style = "border: none; background: none; outline: none;"><a class="text-light text-decoration-none"><span  id = "forSaleColor" style = "color: #02FFB3">For Sale</span></a></button>
+                                    <button class = "mb-0 px-5 pb-1 text-decoration-none" onclick = "floorCalc1()" style = "border: none; background: none; outline: none;"><a class="text-light text-decoration-none"><span  id = "floorColor">Floor</span></a></button>
+                                </div>
 
                                 <!-- For Sale Calc-->
 
-                            {% if nft.is_for_sale == 1 %}
-                                <div class = "view_calculator_for_sale_types d-flex justify-content-around pb-1">
-                                    <p class = "mb-0 px-5"><span style = "color: #02FFB3">For Sale</span></p>
-                                    <p class = "font_opacity mb-0 px-5">Floor</p>
-                                </div>
-                                <div class = "border_line border-top mx-5"></div>
-                                <div class = "view_sale_price d-flex justify-content-between px-4 pt-3">
-                                    <h6>Sale Price</h6>
-                                    <h6>{{nft.sale_price}}<span style = "color: #02FFB3"> SOL</span></h6>
-                                </div>
-                                <div class = "view_purchase_price d-flex justify-content-between px-4">
-                                    <h6>Purchase Price</h6>
-                                    <h6>-{{nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
-                                </div>
-                                <div class = "view_trade_fees_sold d-flex justify-content-between px-4">
-                                    <h7>Fees</h7>
-                                    <h7>-{{nft.trade_fees}}<span style = "color: #02FFB3"> %</span></h7>
-                                </div>
-                                <div class = "view_profit_sold mt-2 mx-3">
-                                    <div class = "d-flex justify-content-between px-3 py-3">
-                                        {% if nft.sale_price > nft.purchase_price %}
-                                        <h5 class = "profit_text">Potential Profit</h5>
-                                        <h5>+{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
-                                        {% else %}
-                                        <h5 class = "text-danger">Potential Loss</h5>
-                                        <h5>{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+                                <div id = "forSaleCalculator">
+                                    <div class = "border_line border-top mx-4"></div>
+                                    <div class = "view_sale_price d-flex justify-content-between px-4 pt-3">
+                                        <h6>Sale Price</h6>
+                                        <h6>{{nft.sale_price}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                    </div>
+                                    <div class = "view_purchase_price d-flex justify-content-between px-4">
+                                        <h6>Purchase Price</h6>
+                                        <h6>-{{nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                    </div>
+                                    <div class = "view_trade_fees_sold d-flex justify-content-between px-4">
+                                        <h7>Fees</h7>
+                                        <h7>-{{nft.trade_fees}}<span style = "color: #02FFB3"> %</span></h7>
+                                    </div>
+                                    <div class = "view_profit_sold mt-2 mx-3">
+                                        <div class = "d-flex justify-content-between px-3 py-3">
+                                            {% if nft.sale_price > nft.purchase_price %}
+                                            <h5 class = "profit_text">Potential Profit</h5>
+                                            <h5>+{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+                                            {% else %}
+                                            <h5 class = "text-danger">Potential Loss</h5>
+                                            <h5>{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
 
-                                        {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Floor Calc-->
+
+                                <div id = "floorCalculator" style = "display: none">
+                                    <div class = "border_line border-top mx-4"></div>
+                                    <div class = "view_sale_price d-flex justify-content-between px-4 pt-3">
+                                        <h6>Floor Price</h6>
+                                        <h6>{{floor}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                    </div>
+                                    <div class = "view_purchase_price d-flex justify-content-between px-4">
+                                        <h6>Purchase Price</h6>
+                                        <h6>-{{nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                    </div>
+                                    <div class = "view_trade_fees_sold d-flex justify-content-between px-4">
+                                        <h7>Fees</h7>
+                                        <h7>-{{nft.trade_fees}}<span style = "color: #02FFB3"> %</span></h7>
+                                    </div>
+                                    <div class = "view_profit_sold mt-2 mx-3">
+                                        <div class = "d-flex justify-content-between px-3 py-3">
+                                            {% if floor > nft.purchase_price %}
+                                            <h5 class = "profit_text">Potential Profit</h5>
+                                            <h5>+{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+                                            {% else %}
+                                            <h5>Potential Loss</h5>
+                                            <h5>{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
                             {% endif %}
@@ -251,4 +316,34 @@
         </div>
     </div>
 </body>
+
+<script>
+    function forSaleCalc1() {
+        var x = document.getElementById("forSaleCalculator");
+        var floor = document.getElementById("floorCalculator");
+        var floorColor = document.getElementById("floorColor")
+        var forSaleColor = document.getElementById("forSaleColor")
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            floor.style.display = "none";
+            floorColor.style.color = "white";
+            forSaleColor.style.color = "#02FFB3";
+        }
+    }
+
+    function floorCalc1() {
+        var x = document.getElementById("floorCalculator");
+        var forSale = document.getElementById("forSaleCalculator");
+        var floorColor = document.getElementById("floorColor")
+        var forSaleColor = document.getElementById("forSaleColor")
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            forSale.style.display = "none";
+            floorColor.style.color = "#02FFB3";
+            forSaleColor.style.color = "white";
+        }
+    }
+
+</script>
+
 </html>

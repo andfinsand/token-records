@@ -133,6 +133,13 @@
                                 <div class = "view_collection_name text-center m-2 pt-3 pb-2">
                                     <h2><span style = "color: #02FFB3">{{nft.collection_name}}</span></h2>
                                 </div>
+                                <div class = "view_sale_price d-flex justify-content-between px-4">
+                                    <p>Sale Price</p>
+                                    <div class = "view_sale_price_value d-flex">
+                                        <h4 class = "px-2">{{nft.sale_price}}</h4>
+                                        <h4><span style = "color: #02FFB3">SOL</span></h4>
+                                    </div>
+                                </div>
                                 <div class = "view_sale_date d-flex justify-content-between px-4">
                                     <p>Date of Sale</p>
                                     <p>{{nft.date_of_sale}}</p>
@@ -153,7 +160,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class = "view_returns_sold mx-2 mt-4 p-2">
+                        <div class = "view_returns_sold mx-2 mt-4 p-2 px-3">
                             <div class = "view_calculator_text text-center pt-3 pb-2">
                                 <h3><span style = "color: #02FFB3">Returns</span></h3>
                             </div>
@@ -165,7 +172,7 @@
                                 <h6>Purchase Price</h6>
                                 <h6>-{{nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
                             </div>
-                            <div class = "border_line border-top mx-5"></div>
+                            <div class = "border_line border-top mx-4"></div>
                             <div class = "view_purchase_price d-flex justify-content-between px-4 pt-3">
                                 <h6>Net Total</h6>
                                 <h6>{{nft.sale_price - nft.purchase_price}}<span style = "color: #02FFB3"> SOL</span></h6>
@@ -177,10 +184,10 @@
                             <div class = "view_profit_sold mt-1 mx-3">
                                 <div class = "d-flex justify-content-between px-3 py-2">
                                     {% if nft.sale_price > nft.purchase_price %}
-                                    <h2 class = "profit_text"><span style = "color: #00FF19">Profit</span></h2>
+                                    <h2 class = "profit_text">Profit</h2>
                                     <h2>+{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h2>
                                     {% else %}
-                                    <h2 class = "text-danger">Loss</h2>
+                                    <h2>Loss</h2>
                                     <h2>{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h2>
 
                                     {% endif %}

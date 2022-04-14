@@ -36,13 +36,14 @@ class Nft:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM nfts JOIN users ON users.id = nfts.user_id;"
+        query = "SELECT * FROM nfts JOIN users ON users.id = nfts.user_id ORDER BY collection_name;"
         results = connectToMySQL(db_name).query_db(query)
         collections = []
         for collection in results:
             collections.append( cls(collection) )
         # favorites.sort(reverse=True)
         return collections
+
 
     # @classmethod
     # def get_by_id(cls, data):
@@ -73,8 +74,23 @@ class Nft:
         return connectToMySQL(db_name).query_db(query, data)
 
     @classmethod
+    def update_collection(cls, data):
+        query = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET status=%(status)s, collection_name=%(collection_name)s, token_number=%(token_number)s, collection_link_to_exchange=%(collection_link_to_exchange)s, purchase_price=%(purchase_price)s, date_of_purchase=%(date_of_purchase)s, date_of_sale=%(date_of_sale)s, trade_fees=%(trade_fees)s, has_staking=%(has_staking)s, notes=%(notes)s, is_for_sale=%(is_for_sale)s, sale_price=%(sale_price)s, link_to_sale=%(link_to_sale)s WHERE nfts.id = %(nft_id)s;"
+        return connectToMySQL(db_name).query_db(query, data)
+
+    @classmethod
+    def update_sold(cls, data):
+        query = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET status=%(status)s, collection_name=%(collection_name)s, token_number=%(token_number)s, collection_link_to_exchange=%(collection_link_to_exchange)s, purchase_price=%(purchase_price)s, date_of_purchase=%(date_of_purchase)s, date_of_sale=%(date_of_sale)s, trade_fees=%(trade_fees)s, has_staking=%(has_staking)s, notes=%(notes)s, sale_price=%(sale_price)s, link_to_sale=%(link_to_sale)s WHERE nfts.id = %(nft_id)s;"
+        return connectToMySQL(db_name).query_db(query, data)
+
+    @classmethod
+    def update_watchlist(cls, data):
+        query = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET status=%(status)s, collection_name=%(collection_name)s, token_number=%(token_number)s, collection_link_to_exchange=%(collection_link_to_exchange)s, trade_fees=%(trade_fees)s, bid_price=%(bid_price)s, has_staking=%(has_staking)s, notes=%(notes)s, sale_price=%(sale_price)s, link_to_sale=%(link_to_sale)s WHERE nfts.id = %(nft_id)s;"
+        return connectToMySQL(db_name).query_db(query, data)
+
+    @classmethod
     def update_from_watchlist(cls, data):
-        query = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET status=%(status)s, image_name=%(image_name)s, collection_name=%(collection_name)s, token_number=%(token_number)s, collection_link_to_exchange=%(collection_link_to_exchange)s, purchase_price=%(purchase_price)s, date_of_purchase=%(date_of_purchase)s, trade_fees=%(trade_fees)s, has_staking=%(has_staking)s, notes=%(notes)s, is_for_sale=%(is_for_sale)s, sale_price=%(sale_price)s, link_to_sale=%(link_to_sale)s WHERE nfts.id = %(nft_id)s;"
+        query = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET status=%(status)s, collection_name=%(collection_name)s, token_number=%(token_number)s, collection_link_to_exchange=%(collection_link_to_exchange)s, purchase_price=%(purchase_price)s, date_of_purchase=%(date_of_purchase)s, trade_fees=%(trade_fees)s, has_staking=%(has_staking)s, notes=%(notes)s, is_for_sale=%(is_for_sale)s, sale_price=%(sale_price)s, link_to_sale=%(link_to_sale)s WHERE nfts.id = %(nft_id)s;"
         return connectToMySQL(db_name).query_db(query, data)
 
     # @staticmethod

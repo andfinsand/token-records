@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&family=Play:wght@400;700&family=Roboto:wght@400;500&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;500&family=Play:wght@400;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -104,17 +104,19 @@
                                     <div class = "click_to_view_info_box_background">
                                         <div class = "click_to_view text-light mt-5 mb-5">
                                             <a href = "/sold_view/{{nft.id}}" class = "nft_image font-weight-bold text-decoration-none"><img class = "img" src = "{{ url_for('static' , filename = 'uploads/' + nft.image_name) }}"></a>
-                                            <div class = "click_to_view_info_box mb-2">
-                                                <h5 class = "overflow px-2 pt-2">{{nft.collection_name}}</h5>
-                                                <h6>#{{nft.token_number}}</h6>
+                                            <div class = "click_to_view_info_box d-flex flex-column justify-content-between">
+                                                <div>
+                                                    <h5 class = "overflow px-2 pt-2">{{nft.collection_name}}</h5>
+                                                    <h6>#{{nft.token_number}}</h6>
+                                                </div>
                                                 {% if nft.sale_price > nft.purchase_price %}
-                                                    <div class = "d-flex justify-content-around px-2 pt-2">
+                                                    <div class = "d-flex justify-content-between px-3 pt-2">
                                                     <!-- <h6><span style = "color: #00FF57">Profit +{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}} SOL</span></span></h6> -->
                                                         <h6 class = "click_to_view_content"><span style = "color: #00FF75">Profit</span></span></h6>
                                                         <h6 class = "click_to_view_content"><span style = "color: #00FF75"> +{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}} SOL</span></span></h6>
                                                     </div>
                                                 {% else %}
-                                                    <div class = "d-flex justify-content-around px-2 pt-2">
+                                                    <div class = "d-flex justify-content-between px-3 pt-2">
                                                         <h6 class = "click_to_view_content"><span class ="text-danger">Loss</span></h6>
                                                         <h6 class = "click_to_view_content"><span class ="text-danger"> {{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}} SOL</span></h6>
                                                     </div>
