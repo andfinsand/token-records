@@ -120,7 +120,11 @@
                                                     {% endif %}
                                                     <div class = "d-flex justify-content-between px-3">
                                                         <h6 class = "click_to_view_content"><span style = "color: #D459FF">Floor Price</span></h6>
-                                                        <h6 class = "click_to_view_content"><span style = "color: #D459FF"> {{'%0.2f' % (floor)}} SOL</span></h6>
+                                                        {% if nft.mint_address == "" %}
+                                                            <h6 class = "click_to_view_content"><span style = "color: #D459FF"> No Metadata</span></h6>
+                                                        {% else %}
+                                                            <h6 class = "click_to_view_content"><span style = "color: #D459FF"> {{nft.floor_price}} SOL</span></h6>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>

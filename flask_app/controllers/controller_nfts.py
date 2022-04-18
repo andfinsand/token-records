@@ -24,28 +24,60 @@ def collection():
         'id': session['user_id']
     }
 
-    ################# API TEST FLOOR PRICE BEGIN###########
+    ############### API TEST FLOOR PRICE BEGIN###########
 
-    url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
+    # url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
 
-    payload={}
-    headers = {}
+    # payload={}
+    # headers = {}
 
-    response = requests.request("GET", url, headers=headers, data=payload)
-    floor = json.loads(response.content)
-    floor_price = floor['floorPrice']
-    print(response.text)
-    def move_point(number, shift, base = 10):
-        return number * base**shift
+    # response = requests.request("GET", url, headers=headers, data=payload)
+    # floor = json.loads(response.content)
+    # floor_price = floor['floorPrice']
+    # print(response.text)
+    # def move_point(number, shift, base = 10):
+    #     return number * base**shift
 
-    new = move_point( floor_price , -9)
+    # new = move_point( floor_price , -9)
 
-################# API TEST FLOOR PRICE END###########
+############### API TEST FLOOR PRICE END 1 ###########
+
+################# API TEST FLOOR PRICE BEGIN 2 ###########
 
     user = User.get_by_id(data)
     nfts = Nft.get_all()
+    with_mint = []
+    no_mint = []
+    new_list = []
 
-    return render_template('/collection/collection.html' , user = user , nfts = nfts , floor = new)
+    for new in nfts:
+        if new.status == 0:
+            new_list.append(new)
+
+    for nft in new_list:
+        if nft.mint_address:
+
+            mint_response = requests.get(f"https://api-mainnet.magiceden.dev/v2/tokens/{nft.mint_address}")
+            mint = json.loads(mint_response.content)
+            collection_name = mint['collection']
+            print(collection_name)
+
+
+            response = requests.get(f"https://api-mainnet.magiceden.dev/v2/collections/{collection_name}/stats")
+            floor = json.loads(response.content)
+            floor_price = floor['floorPrice']
+            print(floor_price)
+
+            # nft.floor_price = str(floor_price).strip("0") + "0"
+
+            #function inside loop is not good practice
+            def move_point(number, shift, base = 10):
+                return number * base**shift
+
+            floor_math_decimal = decimal.Decimal(move_point( floor_price , -9))
+            nft.floor_price = decimal.Decimal("{:.2f}".format(floor_math_decimal))
+
+    return render_template('/collection/collection.html' , user = user , nfts = new_list )
 
 #################################################### Add new NFT Collection ########################################################
 
@@ -105,6 +137,7 @@ def process_new_collection():
         "is_for_sale": request.form['is_for_sale'],
         "sale_price": request.form['sale_price'],
         "link_to_sale": request.form['link_to_sale'],
+        "mint_address": request.form['mint_address'],
         "user_id": session["user_id"]
     }
     # return redirect(f'/main/{id}')
@@ -176,26 +209,39 @@ def collection_view(id):
 
 ################# API TEST FLOOR PRICE BEGIN###########
 
-    url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
 
-    payload={}
-    headers = {}
+    mint_address_db = Nft.get_mint(data)
+    if len(mint_address_db.mint_address) > 0:
 
-    response = requests.request("GET", url, headers=headers, data=payload)
-    floor = json.loads(response.content)
-    floor_price = floor['floorPrice']
-    print(response.text)
-    def move_point(number, shift, base = 10):
-        return number * base**shift
+        payload={}
+        headers = {}
 
-    floor_math = decimal.Decimal(move_point( floor_price , -9))
+        mint_address_url = "https://api-mainnet.magiceden.dev/v2/tokens/{}".format(mint_address_db.mint_address)
 
-    # floor_display = move_point( floor_price , -9)
+        mint_response = requests.request("GET", mint_address_url, headers=headers, data=payload)
+        mint = json.loads(mint_response.content)
+        collection_name = mint['collection']
+
+        collection_url = "https://api-mainnet.magiceden.dev/v2/collections/{}/stats".format(collection_name)
+
+        response = requests.request("GET", collection_url, headers=headers, data=payload)
+        floor = json.loads(response.content)
+        floor_price = floor['floorPrice']
+        def move_point(number, shift, base = 10):
+            return number * base**shift
+
+        floor_math_decimal = decimal.Decimal(move_point( floor_price , -9))
+        floor_math = decimal.Decimal("{:.2f}".format(floor_math_decimal))
+
+        nft = Nft.get_by_id(data)
+        image = url_for('static' , filename = 'uploads/' + nft.image_name)
+
+    elif len(mint_address_db.mint_address) == 0:
 
 ################# API TEST FLOOR PRICE END###########
-
-    nft = Nft.get_by_id(data)
-    image = url_for('static' , filename = 'uploads/' + nft.image_name)
+        floor_math = -1
+        nft = Nft.get_by_id(data)
+        image = url_for('static' , filename = 'uploads/' + nft.image_name)
 
     return render_template('/collection/collection_view.html' , user = User.get_by_id(user_data) , nft = nft , image = image , floor = floor_math )
 
@@ -232,13 +278,13 @@ def process_from_watchlist():
         "collection_link_to_exchange": request.form['collection_link_to_exchange'],
         "purchase_price": request.form['purchase_price'],
         "date_of_purchase": request.form['date_of_purchase'],
-
         "trade_fees": request.form['trade_fees'],
         "has_staking": request.form['has_staking'],
         "notes": request.form['notes'],
         "is_for_sale": request.form['is_for_sale'],
         "sale_price": request.form['sale_price'],
         "link_to_sale": request.form['link_to_sale'],
+        "mint_address": request.form['mint_address'],
         "user_id": session["user_id"]
     }
     # return redirect(f'/main/{id}')
@@ -279,3 +325,49 @@ def solana_chart():
     }
     # nfts = nft.get_all()
     return render_template('/solana_chart/solana_chart.html' , user=User.get_by_id(data))
+
+
+
+
+
+
+##################### THIS IS FOR VIEW PAGE BEFORE THE TWO API INTEGRATIONS ############################################
+# Will have to delete 'mint_address' from DB and remove from controller, model and html.
+
+##################################################### Collection VIEW NFT ########################################################
+
+# @app.route('/collection_view/<int:id>')
+# def collection_view(id):
+#     if 'user_id' not in session:
+#         return redirect('/logout')
+#     data = {
+#         "id" : id ,
+#     }
+#     user_data = {
+#         "id" : session['user_id']
+#     }
+
+# ################# API TEST FLOOR PRICE BEGIN###########
+
+#     url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
+
+#     payload={}
+#     headers = {}
+
+#     response = requests.request("GET", url, headers=headers, data=payload)
+#     floor = json.loads(response.content)
+#     floor_price = floor['floorPrice']
+#     print(response.text)
+#     def move_point(number, shift, base = 10):
+#         return number * base**shift
+
+#     floor_math = decimal.Decimal(move_point( floor_price , -9))
+
+#     # floor_display = move_point( floor_price , -9)
+
+# ################# API TEST FLOOR PRICE END###########
+
+#     nft = Nft.get_by_id(data)
+#     image = url_for('static' , filename = 'uploads/' + nft.image_name)
+
+#     return render_template('/collection/collection_view.html' , user = User.get_by_id(user_data) , nft = nft , image = image , floor = floor_math )

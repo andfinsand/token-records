@@ -83,6 +83,7 @@ def process_new_sold():
         "is_for_sale": request.form['is_for_sale'],
         "sale_price": request.form['sale_price'],
         "link_to_sale": request.form['link_to_sale'],
+        "mint_address": request.form['mint_address'],
         "user_id": session["user_id"]
     }
     # return redirect(f'/main/{id}')
@@ -104,7 +105,7 @@ def edit_sold(id):
     }
     return render_template('sold/sold_edit.html', edit = Nft.get_by_id(data) , user=User.get_by_id(user_data))
 
-###########################################3########### Process Edit Collection Form ################################################
+###########################################3########### Process Edit Sold Form ################################################
 
 @app.route('/process_edit_sold', methods=['POST'])
 def update_sold():
@@ -183,7 +184,6 @@ def process_from_collection():
 
     data = {
         "nft_id" : request.form["nft_id"],
-        "image_name" : image.filename,
         "status" : request.form["status"],
         "collection_name" : request.form['collection_name'],
         "token_number": request.form['token_number'],

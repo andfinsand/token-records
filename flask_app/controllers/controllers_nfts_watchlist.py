@@ -59,6 +59,7 @@ def process_new_watchlist():
         "notes": request.form['notes'],
         "sale_price": request.form['sale_price'],
         "link_to_sale": request.form['link_to_sale'],
+        "mint_address": request.form['mint_address'],
         "user_id": session["user_id"]
     }
     # return redirect(f'/main/{id}')

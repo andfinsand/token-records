@@ -187,7 +187,11 @@
                                     <div class = "border_line border-top mx-4"></div>
                                     <div class = "view_sale_price d-flex justify-content-between px-4 pt-3">
                                         <h6>Floor Price</h6>
-                                        <h6>{{floor}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                        {% if floor == -1 %}
+                                            <h6>Metadata missing<span style = "color: #02FFB3"> SOL</span></h6>
+                                        {% else %}
+                                            <h6>{{floor}}<span style = "color: #02FFB3"> SOL</span></h6>
+                                        {% endif %}
                                     </div>
                                     <div class = "view_purchase_price d-flex justify-content-between px-4">
                                         <h6>Purchase Price</h6>
@@ -199,13 +203,17 @@
                                     </div>
                                     <div class = "view_profit_sold mt-2 mx-3">
                                         <div class = "d-flex justify-content-between px-3 py-3">
-                                            {% if floor > nft.purchase_price %}
-                                            <h5 class = "profit_text">Potential Profit</h5>
-                                            <h5>+{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+                                            {% if floor == -1 %}
+                                                <div>Metadata missing</div>
                                             {% else %}
-                                            <h5>Potential Loss</h5>
-                                            <h5>{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+                                                {% if floor > nft.purchase_price %}
+                                                <h5 class = "profit_text">Potential Profit</h5>
+                                                <h5>+{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
+                                                {% else %}
+                                                <h5>Potential Loss</h5>
+                                                <h5>{{'%0.2f' % (floor - nft.purchase_price - (floor * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
 
+                                                {% endif %}
                                             {% endif %}
                                         </div>
                                     </div>
@@ -243,10 +251,10 @@
                                     <div class = "view_profit_sold mt-2 mx-3">
                                         <div class = "d-flex justify-content-between px-3 py-3">
                                             {% if nft.sale_price > nft.purchase_price %}
-                                            <h5 class = "profit_text">Potential Profit</h5>
+                                            <h5 class = "profit_text">Expected Profit</h5>
                                             <h5>+{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
                                             {% else %}
-                                            <h5 class = "text-danger">Potential Loss</h5>
+                                            <h5>Expected Loss</h5>
                                             <h5>{{'%0.2f' % (nft.sale_price - nft.purchase_price - (nft.sale_price * (nft.trade_fees/100)))}}<span style = "color: #02FFB3"> SOL</span></h5>
 
                                             {% endif %}
