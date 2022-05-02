@@ -46,8 +46,6 @@ def collection():
 
     user = User.get_by_id(data)
     nfts = Nft.get_all()
-    with_mint = []
-    no_mint = []
     new_list = []
 
     for new in nfts:
