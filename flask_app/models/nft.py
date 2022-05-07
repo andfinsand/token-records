@@ -109,7 +109,7 @@ class Nft:
         return connectToMySQL(db_name).query_db(query, data)
 
     # @staticmethod
-    # def validate_new_user(x):
+    # def nft_data(x):
     #     is_valid = True
     #     query = "SELECT * FROM users WHERE email = %(email)s;"
     #     results = connectToMySQL(db_name).query_db(query, x)
