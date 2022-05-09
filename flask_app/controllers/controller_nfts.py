@@ -59,14 +59,12 @@ def collection():
             mint = json.loads(mint_response.content)
             collection_name = mint['collection']
             print(collection_name)
-
+            # collection_name = nft.metadata_collection_name (this is for the new API design to eliminate 'collection name' GET request)
 
             response = requests.get(f"https://api-mainnet.magiceden.dev/v2/collections/{collection_name}/stats")
             floor = json.loads(response.content)
             floor_price = floor['floorPrice']
             print(floor_price)
-
-            # nft.floor_price = str(floor_price).strip("0") + "0"
 
             #function inside loop is not good practice
             def move_point(number, shift, base = 10):
@@ -138,8 +136,18 @@ def process_new_collection():
         "mint_address": request.form['mint_address'],
         "user_id": session["user_id"]
     }
-    # return redirect(f'/main/{id}')
+
     Nft.create(data)
+
+    # Preparing for API GET request for metadata collection name
+    # Might need an if statement in case mint_address is not provided.
+
+    # mint_address_db = Nft.get_mint(data)
+    # if len(mint_address_db.mint_address) > 0:
+    # mint_response = requests.get(f"https://api-mainnet.magiceden.dev/v2/tokens/{mint_address_db.mint_address}")
+    # mint = json.loads(mint_response.content)
+    # metadata_collection_name = mint['collection']
+    # Nft.metadata_collection_name = metadata_collection_name OR Nft.update_metadata_collection_name(metadata_collection_name) and make this a separate update query
 
     return redirect('/collection')
 
