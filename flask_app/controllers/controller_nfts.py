@@ -213,39 +213,30 @@ def collection_view(id):
         "id" : session['user_id']
     }
 
-################# API TEST FLOOR PRICE BEGIN###########
+################# API FLOOR PRICE BEGIN###########
 
+    get_nft = Nft.get_mint(data)
+    if len(get_nft.metadata_collection_name) > 0:
 
-    mint_address_db = Nft.get_mint(data)
-    if len(mint_address_db.mint_address) > 0:
-
-        payload={}
-        headers = {}
-
-        mint_address_url = "https://api-mainnet.magiceden.dev/v2/tokens/{}".format(mint_address_db.mint_address)
-
-        mint_response = requests.request("GET", mint_address_url, headers=headers, data=payload)
-        mint = json.loads(mint_response.content)
-        collection_name = mint['collection']
-
-        collection_url = "https://api-mainnet.magiceden.dev/v2/collections/{}/stats".format(collection_name)
-
-        response = requests.request("GET", collection_url, headers=headers, data=payload)
+        response = requests.get(f"https://api-mainnet.magiceden.dev/v2/collections/{get_nft.metadata_collection_name}/stats")
         floor = json.loads(response.content)
         floor_price = floor['floorPrice']
+        print(floor_price)
+
+        #function inside loop is not good practice
         def move_point(number, shift, base = 10):
             return number * base**shift
 
         floor_math_decimal = decimal.Decimal(move_point( floor_price , -9))
         floor_math = decimal.Decimal("{:.2f}".format(floor_math_decimal))
-        print(floor_math)
 
         nft = Nft.get_by_id(data)
         image = url_for('static' , filename = 'uploads/' + nft.image_name)
 
-    elif len(mint_address_db.mint_address) == 0:
+    elif len(get_nft.metadata_collection_name) == 0:
 
-################# API TEST FLOOR PRICE END###########
+################# API FLOOR PRICE END###########
+
         floor_math = -1
         nft = Nft.get_by_id(data)
         image = url_for('static' , filename = 'uploads/' + nft.image_name)
@@ -332,49 +323,3 @@ def solana_chart():
     }
     # nfts = nft.get_all()
     return render_template('/solana_chart/solana_chart.html' , user=User.get_by_id(data))
-
-
-
-
-
-
-##################### THIS IS FOR VIEW PAGE BEFORE THE TWO API INTEGRATIONS ############################################
-# Will have to delete 'mint_address' from DB and remove from controller, model and html.
-
-##################################################### Collection VIEW NFT ########################################################
-
-# @app.route('/collection_view/<int:id>')
-# def collection_view(id):
-#     if 'user_id' not in session:
-#         return redirect('/logout')
-#     data = {
-#         "id" : id ,
-#     }
-#     user_data = {
-#         "id" : session['user_id']
-#     }
-
-# ################# API TEST FLOOR PRICE BEGIN###########
-
-#     url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
-
-#     payload={}
-#     headers = {}
-
-#     response = requests.request("GET", url, headers=headers, data=payload)
-#     floor = json.loads(response.content)
-#     floor_price = floor['floorPrice']
-#     print(response.text)
-#     def move_point(number, shift, base = 10):
-#         return number * base**shift
-
-#     floor_math = decimal.Decimal(move_point( floor_price , -9))
-
-#     # floor_display = move_point( floor_price , -9)
-
-# ################# API TEST FLOOR PRICE END###########
-
-#     nft = Nft.get_by_id(data)
-#     image = url_for('static' , filename = 'uploads/' + nft.image_name)
-
-#     return render_template('/collection/collection_view.html' , user = User.get_by_id(user_data) , nft = nft , image = image , floor = floor_math )
