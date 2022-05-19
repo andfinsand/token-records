@@ -24,44 +24,20 @@ def collection():
         'id': session['user_id']
     }
 
-    ############### API TEST FLOOR PRICE BEGIN###########
-
-    # url = "https://api-mainnet.magiceden.dev/v2/collections/akari/stats"
-
-    # payload={}
-    # headers = {}
-
-    # response = requests.request("GET", url, headers=headers, data=payload)
-    # floor = json.loads(response.content)
-    # floor_price = floor['floorPrice']
-    # print(response.text)
-    # def move_point(number, shift, base = 10):
-    #     return number * base**shift
-
-    # new = move_point( floor_price , -9)
-
-############### API TEST FLOOR PRICE END 1 ###########
-
-################# API TEST FLOOR PRICE BEGIN 2 ###########
+################# API TEST FLOOR PRICE ###########
 
     user = User.get_by_id(data)
     nfts = Nft.get_all()
     new_list = []
 
     for new in nfts:
-        if new.status == 0:
+        if new.status == 0 and new.user_id == data['id']:
             new_list.append(new)
-
+            print(new.collection_name)
     for nft in new_list:
-        if nft.mint_address:
+        if nft.metadata_collection_name:
 
-            mint_response = requests.get(f"https://api-mainnet.magiceden.dev/v2/tokens/{nft.mint_address}")
-            mint = json.loads(mint_response.content)
-            collection_name = mint['collection']
-            print(collection_name)
-            # collection_name = nft.metadata_collection_name (this is for the new API design to eliminate 'collection name' GET request)
-
-            response = requests.get(f"https://api-mainnet.magiceden.dev/v2/collections/{collection_name}/stats")
+            response = requests.get(f"https://api-mainnet.magiceden.dev/v2/collections/{nft.metadata_collection_name}/stats")
             floor = json.loads(response.content)
             floor_price = floor['floorPrice']
             print(floor_price)
@@ -118,36 +94,60 @@ def process_new_collection():
         image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
         print(image.filename + '*****************************************************************')
 
-    data = {
-        "image_name" : image.filename,
-        "status" : request.form["status"],
-        "collection_name" : request.form['collection_name'],
-        "token_number": request.form['token_number'],
-        "collection_link_to_exchange": request.form['collection_link_to_exchange'],
-        "purchase_price": request.form['purchase_price'],
-        "date_of_purchase": request.form['date_of_purchase'],
-        "date_of_sale": request.form['date_of_sale'],
-        "trade_fees": request.form['trade_fees'],
-        "has_staking": request.form['has_staking'],
-        "notes": request.form['notes'],
-        "is_for_sale": request.form['is_for_sale'],
-        "sale_price": request.form['sale_price'],
-        "link_to_sale": request.form['link_to_sale'],
-        "mint_address": request.form['mint_address'],
-        "user_id": session["user_id"]
-    }
+    mint_address = request.form['mint_address']
+    if len(mint_address) > 0:
 
-    Nft.create(data)
+        mint_response = requests.get(f"https://api-mainnet.magiceden.dev/v2/tokens/{mint_address}")
+        mint = json.loads(mint_response.content)
+        metadata_collection_name = mint['collection']
+        print(metadata_collection_name + "#######################################################")
 
-    # Preparing for API GET request for metadata collection name
-    # Might need an if statement in case mint_address is not provided.
+        data = {
+            "image_name" : image.filename,
+            "status" : request.form["status"],
+            "collection_name" : request.form['collection_name'],
+            "token_number": request.form['token_number'],
+            "collection_link_to_exchange": request.form['collection_link_to_exchange'],
+            "purchase_price": request.form['purchase_price'],
+            "date_of_purchase": request.form['date_of_purchase'],
+            "date_of_sale": request.form['date_of_sale'],
+            "trade_fees": request.form['trade_fees'],
+            "has_staking": request.form['has_staking'],
+            "notes": request.form['notes'],
+            "is_for_sale": request.form['is_for_sale'],
+            "sale_price": request.form['sale_price'],
+            "link_to_sale": request.form['link_to_sale'],
+            "mint_address": request.form['mint_address'],
+            "metadata_collection_name": metadata_collection_name,
+            "user_id": session["user_id"]
+        }
 
-    # mint_address_db = Nft.get_mint(data)
-    # if len(mint_address_db.mint_address) > 0:
-    # mint_response = requests.get(f"https://api-mainnet.magiceden.dev/v2/tokens/{mint_address_db.mint_address}")
-    # mint = json.loads(mint_response.content)
-    # metadata_collection_name = mint['collection']
-    # Nft.metadata_collection_name = metadata_collection_name OR Nft.update_metadata_collection_name(metadata_collection_name) and make this a separate update query
+        Nft.create(data)
+
+    elif len(mint_address) <= 0:
+        metadata_collection_name = ""
+
+        data = {
+            "image_name" : image.filename,
+            "status" : request.form["status"],
+            "collection_name" : request.form['collection_name'],
+            "token_number": request.form['token_number'],
+            "collection_link_to_exchange": request.form['collection_link_to_exchange'],
+            "purchase_price": request.form['purchase_price'],
+            "date_of_purchase": request.form['date_of_purchase'],
+            "date_of_sale": request.form['date_of_sale'],
+            "trade_fees": request.form['trade_fees'],
+            "has_staking": request.form['has_staking'],
+            "notes": request.form['notes'],
+            "is_for_sale": request.form['is_for_sale'],
+            "sale_price": request.form['sale_price'],
+            "link_to_sale": request.form['link_to_sale'],
+            "mint_address": request.form['mint_address'],
+            "metadata_collection_name": metadata_collection_name,
+            "user_id": session["user_id"]
+        }
+
+        Nft.create(data)
 
     return redirect('/collection')
 
@@ -238,6 +238,7 @@ def collection_view(id):
 
         floor_math_decimal = decimal.Decimal(move_point( floor_price , -9))
         floor_math = decimal.Decimal("{:.2f}".format(floor_math_decimal))
+        print(floor_math)
 
         nft = Nft.get_by_id(data)
         image = url_for('static' , filename = 'uploads/' + nft.image_name)
