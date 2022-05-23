@@ -51,7 +51,7 @@ def collection():
 
     return render_template('/collection/collection.html' , user = user , nfts = new_list )
 
-#################################################### Add new NFT Collection ########################################################
+#################################################### Add new NFT Collection ##########################################################
 
 @app.route('/collection_new')
 def add_new_collection():
