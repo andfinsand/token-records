@@ -110,7 +110,7 @@ class Nft:
         return connectToMySQL(db_name).query_db(query, data)
 
     # @staticmethod
-    # def nft_data(x):
+    # def validate_nft_data(x):
     #     is_valid = True
     #     query = "SELECT * FROM users WHERE email = %(email)s;"
     #     results = connectToMySQL(db_name).query_db(query, x)
@@ -123,13 +123,4 @@ class Nft:
     #     if len(x['first_name']) < 2:
     #         flash("First name must be at least 2 characters." , "register")
     #         is_valid=False
-    #     if len(x['last_name']) < 2:
-    #         flash("Last name must be at least 2 characters." , "register")
-    #         is_valid = False
-    #     if len(x['password']) < 8:
-    #         flash("Password must be at least 8 characters." , "register")
-    #         is_valid = False
-    #     if x['password'] != x['confirm_password']:
-    #         flash("Passwords do not match!" , "register")
-    #         is_valid = False
     #     return is_valid

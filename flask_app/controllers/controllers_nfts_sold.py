@@ -68,6 +68,8 @@ def process_new_sold():
         image = request.files["image"]
         image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
 
+
+    metadata_collection_name = ""
     data = {
         "image_name" : image.filename,
         "status" : request.form["status"],
@@ -84,6 +86,7 @@ def process_new_sold():
         "sale_price": request.form['sale_price'],
         "link_to_sale": request.form['link_to_sale'],
         "mint_address": request.form['mint_address'],
+        "metadata_collection_name": metadata_collection_name,
         "user_id": session["user_id"]
     }
     # return redirect(f'/main/{id}')
