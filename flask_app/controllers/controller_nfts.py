@@ -24,7 +24,7 @@ def collection():
         'id': session['user_id']
     }
 
-################# API TEST FLOOR PRICE ###########
+################# API FLOOR PRICE ###########
 
     user = User.get_by_id(data)
     nfts = Nft.get_all()
@@ -100,7 +100,6 @@ def process_new_collection():
         mint_response = requests.get(f"https://api-mainnet.magiceden.dev/v2/tokens/{mint_address}")
         mint = json.loads(mint_response.content)
         metadata_collection_name = mint['collection']
-        print(metadata_collection_name + "#######################################################")
 
         data = {
             "image_name" : image.filename,

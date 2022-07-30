@@ -48,13 +48,6 @@ class Nft:
         # favorites.sort(reverse=True)
         return collections
 
-
-    # @classmethod
-    # def get_by_id(cls, data):
-    #     query = "SELECT * FROM nfts WHERE id = %(id)s";
-    #     result = connectToMySQL(db_name).query_db(query, data)
-    #     return cls(result[0])
-
     @classmethod
     def get_by_id(cls, data):
         query = "SELECT * FROM nfts JOIN users ON users.id = nfts.user_id WHERE nfts.id = %(id)s";
@@ -65,7 +58,6 @@ class Nft:
     def get_id(cls, data):
         query = "SELECT id FROM nfts JOIN users ON users.id = nfts.user_id WHERE nfts.id = %(id)s";
         return connectToMySQL(db_name).query_db(query, data)
-        
 
     @classmethod
     def get_mint(cls, data):
