@@ -14,7 +14,6 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        # example_list = []
 
     @classmethod
     def create(cls, data):
@@ -43,11 +42,6 @@ class User:
         query = "SELECT * FROM users WHERE id = %(id)s";
         result = connectToMySQL(db_name).query_db(query, data)
         return cls(result[0])
-
-    # @classmethod
-    # def update(cls, data):
-    #     query = "UPDATE table_name(s) SET name=%(name)s, last_name=%(last_name)s, updated_at=NOW() WHERE id = %(id)s;"
-    #     return connectToMySQL('database_file(sometimes a schema)').query_db(query, data)
 
     @staticmethod
     def validate_new_user(x):
