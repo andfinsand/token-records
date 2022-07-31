@@ -1,25 +1,25 @@
-from flask_app import app
+from flask_app import application
 from flask import render_template, redirect, session, request, flash
 from flask_bcrypt import Bcrypt
 from flask_app.models.user import User
 
-bcrypt = Bcrypt(app)
+bcrypt = Bcrypt(application)
 
 # Index and Login
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('login_register/index.html')
 
 # Register
 
-@app.route('/register')
+@application.route('/register')
 def register():
     return render_template('login_register/register.html')
 
 # Register process form
 
-@app.route('/process_registration', methods=['POST'])
+@application.route('/process_registration', methods=['POST'])
 def process_register():
     if not User.validate_new_user(request.form):
         return redirect('/register')
@@ -37,7 +37,7 @@ def process_register():
 
 # Login process form
 
-@app.route('/process_login' , methods = ['POST'])
+@application.route('/process_login' , methods = ['POST'])
 def process_login():
     data = {'email' : request.form['email']}
     user_in_db = User.get_by_email(data)
@@ -52,7 +52,7 @@ def process_login():
 
 # Logout
 
-@app.route('/logout')
+@application.route('/logout')
 def logout():
     session.clear()
     return redirect('/')

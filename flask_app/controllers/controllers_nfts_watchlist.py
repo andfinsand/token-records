@@ -1,11 +1,11 @@
-from flask_app import app
+from flask_app import application
 from flask import render_template, redirect, session, request, flash, url_for
 from flask_app.models.user import User
 from flask_app.models.nft import Nft
 import os
 
 UPLOAD_FOLDER = 'flask_app/static/uploads/'
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+application.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
@@ -13,7 +13,7 @@ def allowed_file(filename):
 
 ####################################################### Main Content #############################################
 
-@app.route('/watchlist')
+@application.route('/watchlist')
 def watchlist():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -27,7 +27,7 @@ def watchlist():
 
 ###################################################### Add New Watchlist #############################################
 
-@app.route('/watchlist_new')
+@application.route('/watchlist_new')
 def add_new_watchlist():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -38,14 +38,13 @@ def add_new_watchlist():
 
 ############################################# Process New Watchlist Form #############################################
 
-@app.route('/process_new_watchlist' , methods=['POST'])
+@application.route('/process_new_watchlist' , methods=['POST'])
 def process_new_watchlist():
     if 'user_id' not in session:
         return redirect('/logout')
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
-        print(image.filename + '*****************************************************************')
+        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
 
     data = {
         "image_name" : image.filename,
@@ -69,7 +68,7 @@ def process_new_watchlist():
 
 ############################################# Edit Watchlist #############################################
 
-@app.route('/watchlist/edit/<int:id>')
+@application.route('/watchlist/edit/<int:id>')
 def edit_watchlist(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -83,18 +82,14 @@ def edit_watchlist(id):
 
 ############################################# Process Edit Watchlist Form #############################################
 
-@app.route('/process_edit_watchlist', methods=['POST'])
+@application.route('/process_edit_watchlist', methods=['POST'])
 def update_watchlist():
     if 'user_id' not in session:
         return redirect('/logout')
 
-    # if not Nft.validate_title(request.form):
-    #     page = request.form['id']
-    #     return redirect (f'/main/edit/{page}')
-
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
+        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
 
     data = {
         "nft_id" : request.form["nft_id"],
@@ -115,7 +110,7 @@ def update_watchlist():
 
 ############################################# Watchlist View #############################################
 
-@app.route('/watchlist_view/<int:id>')
+@application.route('/watchlist_view/<int:id>')
 def watchlist_view(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -133,7 +128,7 @@ def watchlist_view(id):
 
 ################################################ Delete NFT ################################################
 
-@app.route('/destroy_watchlist/nft/<int:id>')
+@application.route('/destroy_watchlist/nft/<int:id>')
 def destroy_watchlist(id):
     if 'user_id' not in session:
         return redirect('/logout')
