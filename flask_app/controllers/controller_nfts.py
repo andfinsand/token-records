@@ -1,4 +1,4 @@
-from flask_app import app
+from flask_app import application
 from flask import render_template, redirect, session, request, flash, url_for
 from flask_app.models.user import User
 from flask_app.models.nft import Nft
@@ -8,7 +8,7 @@ import json
 import decimal
 
 UPLOAD_FOLDER = 'flask_app/static/uploads/'
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+application.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
@@ -16,7 +16,7 @@ def allowed_file(filename):
 
 ##################################################### Collection Main Content ##########################################################
 
-@app.route('/collection')
+@application.route('/collection')
 def collection():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -42,7 +42,6 @@ def collection():
             floor_price = floor['floorPrice']
             print(floor_price)
 
-            #function inside loop is not good practice
             def move_point(number, shift, base = 10):
                 return number * base**shift
 
@@ -53,7 +52,7 @@ def collection():
 
 #################################################### Add new NFT Collection ##########################################################
 
-@app.route('/collection_new')
+@application.route('/collection_new')
 def add_new_collection():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -64,7 +63,7 @@ def add_new_collection():
 
 ####################################################### Process new collection form #################################################
 
-@app.route('/process_new_collection' , methods=['POST'])
+@application.route('/process_new_collection' , methods=['POST'])
 def process_new_collection():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -91,8 +90,7 @@ def process_new_collection():
     #     return redirect ('/new_collection')
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
-        print(image.filename + '*****************************************************************')
+        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
 
     mint_address = request.form['mint_address']
     if len(mint_address) > 0:
@@ -152,7 +150,7 @@ def process_new_collection():
 
 ############################################################ Edit Collection ####################################################
 
-@app.route('/collection/edit/<int:id>')
+@application.route('/collection/edit/<int:id>')
 def edit(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -166,14 +164,10 @@ def edit(id):
 
 ###########################################3########### Process Edit Collection Form ################################################
 
-@app.route('/process_edit_collection', methods=['POST'])
+@application.route('/process_edit_collection', methods=['POST'])
 def update():
     if 'user_id' not in session:
         return redirect('/logout')
-
-    # if not Nft.validate_title(request.form):
-    #     page = request.form['id']
-    #     return redirect (f'/main/edit/{page}')
 
     if request.files:
         image = request.files["image"]
@@ -201,7 +195,7 @@ def update():
 
 ##################################################### Collection VIEW NFT ########################################################
 
-@app.route('/collection_view/<int:id>')
+@application.route('/collection_view/<int:id>')
 def collection_view(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -222,7 +216,6 @@ def collection_view(id):
         floor_price = floor['floorPrice']
         print(floor_price)
 
-        #function inside loop is not good practice
         def move_point(number, shift, base = 10):
             return number * base**shift
 
@@ -234,7 +227,7 @@ def collection_view(id):
 
     elif len(get_nft.metadata_collection_name) == 0:
 
-################# API FLOOR PRICE END###########
+################# API FLOOR PRICE END############
 
         floor_math = -1
         nft = Nft.get_by_id(data)
@@ -244,7 +237,7 @@ def collection_view(id):
 
 ########################################################## COLLECTION FROM WATCHLIST ############################################
 
-@app.route('/collection/collection_from_watchlist/<int:id>')
+@application.route('/collection/collection_from_watchlist/<int:id>')
 def add_from_watchlist(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -258,14 +251,14 @@ def add_from_watchlist(id):
 
 ####################################### Process new Collection FROM Watchlist form ################################################
 
-@app.route('/process_from_watchlist' , methods=['POST'])
+@application.route('/process_from_watchlist' , methods=['POST'])
 def process_from_watchlist():
     if 'user_id' not in session:
         return redirect('/logout')
 
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
+        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
 
     data = {
         "nft_id" : request.form["nft_id"],
@@ -284,14 +277,13 @@ def process_from_watchlist():
         "mint_address": request.form['mint_address'],
         "user_id": session["user_id"]
     }
-    # return redirect(f'/main/{id}')
     Nft.update_from_watchlist(data)
 
     return redirect('/collection')
 
 ################################################################ Delete NFT #########################################################
 
-@app.route('/destroy/nft/<int:id>')
+@application.route('/destroy/nft/<int:id>')
 def destroy(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -302,23 +294,21 @@ def destroy(id):
     return redirect('/collection')
 
 ########################################################## Resources ###################################################################
-@app.route('/resources')
+@application.route('/resources')
 def resources():
     if 'user_id' not in session:
         return redirect('/logout')
     data ={
         'id': session['user_id']
     }
-    # nfts = nft.get_all()
     return render_template('/resources/resources.html' , user=User.get_by_id(data))
 
 ########################################################## SOLANA CHART ###################################################################
-@app.route('/solana_chart')
+@application.route('/solana_chart')
 def solana_chart():
     if 'user_id' not in session:
         return redirect('/logout')
     data ={
         'id': session['user_id']
     }
-    # nfts = nft.get_all()
     return render_template('/solana_chart/solana_chart.html' , user=User.get_by_id(data))
