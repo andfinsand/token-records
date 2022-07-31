@@ -1,11 +1,11 @@
-from flask_app import application
+from flask_app import app
 from flask import render_template, redirect, session, request, flash, url_for
 from flask_app.models.user import User
 from flask_app.models.nft import Nft
 import os
 
 UPLOAD_FOLDER = 'flask_app/static/uploads/'
-application.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
@@ -13,7 +13,7 @@ def allowed_file(filename):
 
 ######################################################## Main Content ##############################################################
 
-@application.route('/sold')
+@app.route('/sold')
 def sold():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -28,7 +28,7 @@ def sold():
 
 ###################################################### Add New Sold #############################################
 
-@application.route('/sold_new')
+@app.route('/sold_new')
 def add_new_sold():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -39,7 +39,7 @@ def add_new_sold():
 
 ############################################# Process New Sold Form #############################################
 
-@application.route('/process_new_sold' , methods=['POST'])
+@app.route('/process_new_sold' , methods=['POST'])
 def process_new_sold():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -66,7 +66,7 @@ def process_new_sold():
     #     return redirect ('/new_collection')
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
 
 
     metadata_collection_name = ""
@@ -96,7 +96,7 @@ def process_new_sold():
 
 ############################################################ Edit Sold ####################################################
 
-@application.route('/sold/edit/<int:id>')
+@app.route('/sold/edit/<int:id>')
 def edit_sold(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -110,7 +110,7 @@ def edit_sold(id):
 
 ###########################################3########### Process Edit Sold Form ################################################
 
-@application.route('/process_edit_sold', methods=['POST'])
+@app.route('/process_edit_sold', methods=['POST'])
 def update_sold():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -121,7 +121,7 @@ def update_sold():
 
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
 
     data = {
         "nft_id" : request.form["nft_id"],
@@ -144,7 +144,7 @@ def update_sold():
 
 ##################################################### Sold View ####################################################
 
-@application.route('/sold_view/<int:id>')
+@app.route('/sold_view/<int:id>')
 def sold_view(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -162,7 +162,7 @@ def sold_view(id):
 
 ############################################ Add new NFT Sold FROM COLLECTION #####################################
 
-@application.route('/sold/sold_from_collection/<int:id>')
+@app.route('/sold/sold_from_collection/<int:id>')
 def add_from_collection(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -176,14 +176,14 @@ def add_from_collection(id):
 
 ############################################## Process new sold FROM COLLECTION form ##########################################
 
-@application.route('/process_from_collection' , methods=['POST'])
+@app.route('/process_from_collection' , methods=['POST'])
 def process_from_collection():
     if 'user_id' not in session:
         return redirect('/logout')
 
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
 
     data = {
         "nft_id" : request.form["nft_id"],
@@ -208,7 +208,7 @@ def process_from_collection():
 
 ########################################################### Delete NFT ##########################################################
 
-@application.route('/destroy_sold/nft/<int:id>')
+@app.route('/destroy_sold/nft/<int:id>')
 def destroy_sold(id):
     if 'user_id' not in session:
         return redirect('/logout')

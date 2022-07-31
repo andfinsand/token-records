@@ -1,4 +1,4 @@
-from flask_app import application
+from flask_app import app
 from flask import render_template, redirect, session, request, flash, url_for
 from flask_app.models.user import User
 from flask_app.models.nft import Nft
@@ -8,7 +8,7 @@ import json
 import decimal
 
 UPLOAD_FOLDER = 'flask_app/static/uploads/'
-application.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
@@ -16,7 +16,7 @@ def allowed_file(filename):
 
 ##################################################### Collection Main Content ##########################################################
 
-@application.route('/collection')
+@app.route('/collection')
 def collection():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -52,7 +52,7 @@ def collection():
 
 #################################################### Add new NFT Collection ##########################################################
 
-@application.route('/collection_new')
+@app.route('/collection_new')
 def add_new_collection():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -63,7 +63,7 @@ def add_new_collection():
 
 ####################################################### Process new collection form #################################################
 
-@application.route('/process_new_collection' , methods=['POST'])
+@app.route('/process_new_collection' , methods=['POST'])
 def process_new_collection():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -90,7 +90,7 @@ def process_new_collection():
     #     return redirect ('/new_collection')
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
 
     mint_address = request.form['mint_address']
     if len(mint_address) > 0:
@@ -150,7 +150,7 @@ def process_new_collection():
 
 ############################################################ Edit Collection ####################################################
 
-@application.route('/collection/edit/<int:id>')
+@app.route('/collection/edit/<int:id>')
 def edit(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -164,7 +164,7 @@ def edit(id):
 
 ###########################################3########### Process Edit Collection Form ################################################
 
-@application.route('/process_edit_collection', methods=['POST'])
+@app.route('/process_edit_collection', methods=['POST'])
 def update():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -195,7 +195,7 @@ def update():
 
 ##################################################### Collection VIEW NFT ########################################################
 
-@application.route('/collection_view/<int:id>')
+@app.route('/collection_view/<int:id>')
 def collection_view(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -237,7 +237,7 @@ def collection_view(id):
 
 ########################################################## COLLECTION FROM WATCHLIST ############################################
 
-@application.route('/collection/collection_from_watchlist/<int:id>')
+@app.route('/collection/collection_from_watchlist/<int:id>')
 def add_from_watchlist(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -251,14 +251,14 @@ def add_from_watchlist(id):
 
 ####################################### Process new Collection FROM Watchlist form ################################################
 
-@application.route('/process_from_watchlist' , methods=['POST'])
+@app.route('/process_from_watchlist' , methods=['POST'])
 def process_from_watchlist():
     if 'user_id' not in session:
         return redirect('/logout')
 
     if request.files:
         image = request.files["image"]
-        image.save(os.path.join(application.config["UPLOAD_FOLDER"], image.filename))
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
 
     data = {
         "nft_id" : request.form["nft_id"],
@@ -283,7 +283,7 @@ def process_from_watchlist():
 
 ################################################################ Delete NFT #########################################################
 
-@application.route('/destroy/nft/<int:id>')
+@app.route('/destroy/nft/<int:id>')
 def destroy(id):
     if 'user_id' not in session:
         return redirect('/logout')
@@ -294,7 +294,7 @@ def destroy(id):
     return redirect('/collection')
 
 ########################################################## Resources ###################################################################
-@application.route('/resources')
+@app.route('/resources')
 def resources():
     if 'user_id' not in session:
         return redirect('/logout')
@@ -304,7 +304,7 @@ def resources():
     return render_template('/resources/resources.html' , user=User.get_by_id(data))
 
 ########################################################## SOLANA CHART ###################################################################
-@application.route('/solana_chart')
+@app.route('/solana_chart')
 def solana_chart():
     if 'user_id' not in session:
         return redirect('/logout')
