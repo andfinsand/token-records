@@ -45,7 +45,6 @@ class Nft:
         collections = []
         for collection in results:
             collections.append( cls(collection) )
-        # favorites.sort(reverse=True)
         return collections
 
     @classmethod
@@ -98,7 +97,6 @@ class Nft:
     @classmethod
     def update_metadata_collection_name(cls, data):
         query = "UPDATE nfts JOIN users ON users.id = nfts.user_id SET metadata_collection_name=%(metadata_collection_name)s WHERE nfts.id = %(nft_id)s;"
-        # query = "INSERT INTO nfts ( metadata_collection_name ) VALUES (%(metadata_collection_name)s)"
         return connectToMySQL(db_name).query_db(query, data)
 
     # @staticmethod
