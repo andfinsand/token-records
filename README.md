@@ -11,7 +11,7 @@ Python | Flask | HTML5 | Bootstrap CSS | MySQL
 
 - Each NFT can be clicked to view image and information.
 
-- Live floor prices for collections are displayed through an API from magiceden.io.
+- Live floor prices for collections are displayed through an API from magiceden.io. This requires inputting the tokens mint address during creation.
 
 - Profits and losses are calculated based on live floor prices or users sale/purchase prices.
 
