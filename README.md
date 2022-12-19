@@ -3,6 +3,10 @@ Organize and track NFT trades made on the Solana blockchain.
 
 Python | Flask | HTML5 | Bootstrap CSS | MySQL
 
+![token-records-landing](https://user-images.githubusercontent.com/88216761/208544182-7d19e712-0525-417f-a0f2-66551d09d8f8.PNG)
+![portfolio-example](https://user-images.githubusercontent.com/88216761/208542828-0bd28964-724d-43a9-9b2c-f4580c0f7ac9.PNG)
+![portfolio-example-2](https://user-images.githubusercontent.com/88216761/208542840-818d469c-68d5-426a-9f44-398d55051bb4.PNG)
+
 - Create an account and password to access your NFTs.
 
 - Organize NFTs on the "Collection", "Sold", or "Watchlist" page.
@@ -24,8 +28,3 @@ Python | Flask | HTML5 | Bootstrap CSS | MySQL
 Roadmap:
   - Resources page to include various useful websites to assist traders with Solana NFT trades such as: on chain analysis, additional exchanges, data analysis, collateral loans, etc. 
   - Blockchain wallet integration with Phantom. 
-
-Images:
-
-![portfolio-example](https://user-images.githubusercontent.com/88216761/208542828-0bd28964-724d-43a9-9b2c-f4580c0f7ac9.PNG)
-![portfolio-example-2](https://user-images.githubusercontent.com/88216761/208542840-818d469c-68d5-426a-9f44-398d55051bb4.PNG)
