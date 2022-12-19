@@ -1,4 +1,4 @@
-# token-records
+# Token Records
 Organize and track NFT trades made on the Solana blockchain.
 
 Python | Flask | HTML5 | Bootstrap CSS | MySQL
@@ -6,6 +6,8 @@ Python | Flask | HTML5 | Bootstrap CSS | MySQL
 ![token-records-landing](https://user-images.githubusercontent.com/88216761/208544182-7d19e712-0525-417f-a0f2-66551d09d8f8.PNG)
 ![portfolio-example](https://user-images.githubusercontent.com/88216761/208542828-0bd28964-724d-43a9-9b2c-f4580c0f7ac9.PNG)
 ![portfolio-example-2](https://user-images.githubusercontent.com/88216761/208545734-02a40267-4a4a-4773-b724-db7a0c38f25e.PNG)
+
+## Features
 
 - Create an account and password to access your NFTs.
 
@@ -25,6 +27,6 @@ Python | Flask | HTML5 | Bootstrap CSS | MySQL
 
 - Additional page for full Solana price chart from tradingview.com.
 
-Roadmap:
+## Roadmap:
   - Resources page to include various useful websites to assist traders with Solana NFT trades such as: on chain analysis, additional exchanges, data analysis, collateral loans, etc. 
   - Blockchain wallet integration with Phantom. 
