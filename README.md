@@ -29,4 +29,4 @@ Python | Flask | HTML5 | Bootstrap CSS | MySQL
 
 ## Roadmap:
   - Resources page to include various useful websites to assist traders with Solana NFT trades such as: on chain analysis, additional exchanges, data analysis, collateral loans, etc. 
-  - Blockchain wallet integration with Phantom. 
+  - Blockchain Phantom wallet integration. 
